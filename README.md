@@ -3,16 +3,18 @@ The best team :)
 
 
 # Partie 1
-Se connecter à GitHub.
+- Se connecter à GitHub.
+![Project Logo](SC-VAL/1e.jpg)
+
+- Cliquer sur New repository et lui donner nom, description, visibilité, licence
+![Project Logo](SC-VAL/1c.jpg)
+![Project Logo](SC-VAL/1d.jpg)
+
+- Aller dans Settings → Collaborators & teams.
 ![Project Logo](SC-VAL/1a.jpg)
 
-Cliquer sur New repository.
-Donner un nom et une description au repository.
-Choisir la visibilité (Public ou Private).
-Choisir une licence. 
-Créer le repository.
-Aller dans Settings → Collaborators & teams.
-Ajouter les membres de l’équipe comme collaborateurs.
+- Ajouter les membres de l’équipe comme collaborateurs.
+![Project Logo](SC-VAL/1b.jpg)
 
 # Partie 2
 
