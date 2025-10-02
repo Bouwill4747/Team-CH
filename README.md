@@ -4,6 +4,7 @@ The best team :)
 
 # Partie 1
 - Se connecter à GitHub.
+
 ![Project Logo](SC-VAL/1e.jpg)
 
 - Cliquer sur New repository et lui donner nom, description, visibilité, licence
