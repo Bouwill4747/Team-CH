@@ -23,6 +23,13 @@ The best team :)
 
 # Partie 2
 
+- Aller dans l'onglet "Issues"
+
+![Logo](SC-ERIC/cliquer-onglet-issues.png)
+
+- Cliquer sur "New Issue"
+
+- 
 
 
 # Partie 3
