@@ -45,16 +45,37 @@ class Bibliotheque:
 
     @staticmethod
     def ajouterAd():
-        print("=== Ajouter un adhérent ===")
-        no_adherent = input(f"Saisissez l'identifiant de l'adhérent : ")
-        nom_adherent = input(f"Saisissez le nom de l'adhérent : ")
-        prenom_adherent = input(f"Saisissez le prénom de l'adhérent : ")
+        while True:
+            print("=== Ajouter un adhérent ===")
 
-        with open("Adherents.csv", "a", newline="") as fichier: # on utilise append ici pour ne pas écraser le contenu du fichier
-            writer = csv.writer(fichier)
-            writer.writerow([no_adherent,nom_adherent,prenom_adherent])
-        print(f"✅ Adhérent #{no_adherent} : {prenom_adherent} {nom_adherent} ajouté avec succès.")
+            while True:
+                adherent = input("Ajouter un nouveau adhérent? (Oui/Non) : ").lower()
 
+                if adherent.lower() == "oui":
+                    no_adherent = input("Saisissez l'identifiant de l'adhérent : ")
+                    nom_adherent = input("Saisissez le nom de l'adhérent : ")
+                    prenom_adherent = input("Saisissez le prénom de l'adhérent : ")
+
+                    with open("Adherents.csv", "a", newline="") as fichier:
+                        writer = csv.writer(fichier)
+                        writer.writerow([no_adherent, nom_adherent, prenom_adherent])
+                    print(f"✅ Adhérent #{no_adherent} : {prenom_adherent} {nom_adherent} ajouté avec succès.")
+
+                    break
+                elif adherent == "non":
+                    break
+                else:
+                    print("❌ Réponse non valide, veuillez répondre par 'Oui' ou 'Non'")
+
+            while True:
+                retour = input("Revenir au menu principal? (Oui/Non) : ").lower()
+
+                if retour == "oui":
+                    return
+                elif retour == "non":
+                    break
+                else:
+                    print("❌ Réponse non valide, veuillez répondre par 'Oui' ou 'Non'")
 
     def enleverAd(self):
         pass
