@@ -60,8 +60,8 @@ class Bibliotheque:
                         writer = csv.writer(fichier)
                         writer.writerow([no_adherent, nom_adherent, prenom_adherent])
                     print(f"✅ Adhérent #{no_adherent} : {prenom_adherent} {nom_adherent} ajouté avec succès.")
-
                     break
+
                 elif adherent == "non":
                     break
                 else:
