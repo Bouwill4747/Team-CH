@@ -1,8 +1,8 @@
 import csv
 
 class Bibliotheque:
-    def __init__(self, nomBiblio):
-        self.nomBibliotheque = nomBiblio
+    def __init__(self, nomBibliotheque):
+        self.nomBibliotheque = nomBibliotheque
 
     def __str__(self):
         return self.nomBibliotheque
@@ -66,7 +66,7 @@ class Bibliotheque:
         pass
 
 if __name__ == "__main__":
-    nomBiblio = Bibliotheque("Ma Bibliothèque")
-    print(nomBiblio)
-    nomBiblio.afficherListeAdherents()
-    nomBiblio.ajouterAd()
+    nomBibliotheque = Bibliotheque("Ma Bibliothèque")
+    print(nomBibliotheque)
+    nomBibliotheque.afficherListeAdherents()
+    nomBibliotheque.ajouterAd()
