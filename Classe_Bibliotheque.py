@@ -31,9 +31,6 @@ class Bibliotheque:
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
-        for x in documents:
-            print(x)
-
 
     @staticmethod
     def afficherListeDocs():
@@ -114,8 +111,6 @@ class Bibliotheque:
     def enleverDoc(self):
         pass
 
-    def sauvegarderModification(self):
-        pass
 
 nomBibliotheque = Bibliotheque("Ma Bibliothèque")
 nomBibliotheque.importer_docs()
