@@ -114,6 +114,8 @@ class Bibliotheque:
     def enleverDoc(self):
         pass
 
+    def sauvegarderModification(self):
+        pass
 
 nomBibliotheque = Bibliotheque("Ma Bibliothèque")
 nomBibliotheque.importer_docs()
