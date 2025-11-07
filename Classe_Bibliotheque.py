@@ -1,11 +1,39 @@
 import csv
-
+from Classe_Document import *
 class Bibliotheque:
     def __init__(self, nomBibliotheque):
         self.nomBibliotheque = nomBibliotheque
 
     def __str__(self):
         return self.nomBibliotheque
+
+    @staticmethod
+    def importer_docs():
+        documents = []
+        try:
+            with open("livres.csv", "r") as fichier:
+
+                lignes = fichier.readlines()
+                del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
+
+                for ligne in lignes:
+
+                    ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
+                    e = ligne.split(",")
+                    titre = e[0]
+                    isbn = e[1]
+                    quantite = int(e[2])
+                    auteur = e[3]
+
+                    nouveau_doc =Livre(titre, isbn, quantite, auteur)
+                    documents.append(nouveau_doc)
+
+        except FileNotFoundError:
+            print("❌ Erreur : Le fichier n'existe pas.")
+
+        for x in documents:
+            print(x)
+
 
     @staticmethod
     def afficherListeDocs():
@@ -86,8 +114,6 @@ class Bibliotheque:
     def enleverDoc(self):
         pass
 
-if __name__ == "__main__":
-    nomBibliotheque = Bibliotheque("Ma Bibliothèque")
-    print(nomBibliotheque)
-    nomBibliotheque.afficherListeAdherents()
-    nomBibliotheque.ajouterAd()
+
+nomBibliotheque = Bibliotheque("Ma Bibliothèque")
+nomBibliotheque.importer_docs()
