@@ -31,6 +31,8 @@ class Bibliotheque:
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
+        return documents
+
 
     @staticmethod
     def afficherListeDocs():

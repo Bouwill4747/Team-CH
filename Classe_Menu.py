@@ -6,31 +6,6 @@ from Classe_Document import *
 def sauvegarderModification():
     pass
 
-def importer_docs():
-    documents = []
-    try:
-        with open("livres.csv", "r") as fichier:
-
-            lignes = fichier.readlines()
-            del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
-
-            for ligne in lignes:
-
-                ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
-                e = ligne.split(",")
-                titre = e[0]
-                isbn = e[1]
-                quantite = int(e[2])
-                auteur = e[3]
-
-                nouveau_doc =Livre(titre, isbn, quantite, auteur)
-                documents.append(nouveau_doc)
-
-    except FileNotFoundError:
-        print("❌ Erreur : Le fichier n'existe pas.")
-
-    return documents
-
 def afficherMenu(nom_biblio="Bibliotheque BDEB"):
 
     # Titre principal
@@ -109,14 +84,14 @@ if __name__ == "__main__":
             Emprunt.prolongerDateRetour()
 
         elif choix.upper() == '11':
-            Bibliotheque.sauvegarderModification()
+            sauvegarderModification()
 
         else:
             print(f"\n→ Vous avez choisi l'option {choix}\n")
             input("Appuyez sur Entrée pour revenir au menu...")
 
 
-documents = importer_docs()
+documents = Bibliotheque.importer_docs()
 print(documents[2].isbn)
 print(documents[2].quantite)
 print(documents[2].auteur)
