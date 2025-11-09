@@ -1,10 +1,6 @@
 # À FAIRE : protéger certaines variables contre les modifications directes? (i.e. utiliser setters)
 
-# La classe Document comprend également tous ses enfants
-# (pour avoir juste une classe à importer au lieu de 6)
-
 from abc import ABC, abstractmethod
-
 
 class Document(ABC): # Classe abstraite
 
