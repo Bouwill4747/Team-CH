@@ -1,9 +1,9 @@
 class Emprunt:
 
-    def __init__(self, dateEmprunt: str, dateRetour: str, adherant, livre):
+    def __init__(self, dateEmprunt: str, dateRetour: str, adherent, livre):
         self.dateEmprunt = dateEmprunt
         self.dateRetour = dateRetour
-        self.adherant = adherant
+        self.adherant = adherent
         self.livre = livre
 
     def prolongerDateRetour(self):

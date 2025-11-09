@@ -1,3 +1,11 @@
+from Classe_Bibliotheque import Bibliotheque
+from Classe_Adherent import Adherent
+from Classe_Emprunt import Emprunt
+from Classe_Document import *
+
+def sauvegarderModification():
+    pass
+
 def afficherMenu(nom_biblio="Bibliotheque BDEB"):
 
     # Titre principal
@@ -34,39 +42,56 @@ def afficherMenu(nom_biblio="Bibliotheque BDEB"):
         choix = input("👉 Choisissez une action (1-11 ou Q pour quitter) : ").strip()
         if choix.upper() == 'Q':
             return 'Q'
-        if choix.upper() == '1':
-            pass
-        if choix.upper() == '2':
-            pass
-        if choix.upper() == '3':
-            pass
-        if choix.upper() == '4':
-            pass
-        if choix.upper() == '5':
-            pass
-        if choix.upper() == '6':
-            pass
-        if choix.upper() == '7':
-            pass
-        if choix.upper() == '8':
-            pass
-        if choix.upper() == '9':
-            pass
-        if choix.upper() == '10':
-            pass
-        if choix.upper() == '11':
-            pass
-        if choix.isdigit() and 1 <= int(choix) <= 11:
+        elif choix.isdigit() and 1 <= int(choix) <= 11:
             return int(choix)
         print("❌ Choix erroné ! Veuillez entrer un nombre entre 1 et 11 ou Q.")
 
-# --- Exemple d'utilisation ---
+# --- Main :) ---
 if __name__ == "__main__":
     while True:
         choix = afficherMenu("Bibliotheque BDEB")
         if choix == 'Q':
             print("\nMerci d'avoir utilisé la bibliothèque ! À bientôt 👋")
             break
+        elif choix.upper() == '1':
+            Bibliotheque.ajouterAd()
+
+        elif choix.upper() == '2':
+            Bibliotheque.enleverAd()
+
+        elif choix.upper() == '3':
+            Bibliotheque.afficherListeAdherents()
+
+        elif choix.upper() == '4':
+            Bibliotheque.ajouterDoc()
+
+        elif choix.upper() == '5':
+            Bibliotheque.enleverDoc()
+
+        elif choix.upper() == '6':
+            Bibliotheque.afficherListeDocs()
+
+        elif choix.upper() == '7':
+            Adherent.emprunterLivre()
+
+        elif choix.upper() == '8':
+            Adherent.rendreLivre()
+
+        elif choix.upper() == '9':
+            Bibliotheque.afficherListeEmprunts()
+
+        elif choix.upper() == '10':
+            Emprunt.prolongerDateRetour()
+
+        elif choix.upper() == '11':
+            sauvegarderModification()
+
         else:
             print(f"\n→ Vous avez choisi l'option {choix}\n")
             input("Appuyez sur Entrée pour revenir au menu...")
+
+
+documents = Bibliotheque.importer_docs()
+print(documents[2].isbn)
+print(documents[2].quantite)
+print(documents[2].auteur)

@@ -31,8 +31,7 @@ class Bibliotheque:
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
-        for x in documents:
-            print(x)
+        return documents
 
 
     @staticmethod
