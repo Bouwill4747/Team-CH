@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
         else:
             print(f"\n→ Vous avez choisi l'option {choix}\n")
-            input("Appuyez sur Entrée pour revenir aué menu...")
+            input("Appuyez sur Entrée pour revenir au menu...")
 
 
 documents = Bibliotheque.importer_docs()
