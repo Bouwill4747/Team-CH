@@ -81,14 +81,15 @@ if __name__ == "__main__":
             Bibliotheque.afficherListeEmprunts()
 
         elif choix.upper() == '10':
-            Emprunt.prolongerDateRetour()
+            pass # Quand on va caller ça, on va demander de combien de jours il faut prolonger l'emprunt
+            # Emprunt.prolonger_date_retour(jours_extra: int)
 
         elif choix.upper() == '11':
             sauvegarderModification()
 
         else:
             print(f"\n→ Vous avez choisi l'option {choix}\n")
-            input("Appuyez sur Entrée pour revenir au menu...")
+            input("Appuyez sur Entrée pour revenir aué menu...")
 
 
 documents = Bibliotheque.importer_docs()
