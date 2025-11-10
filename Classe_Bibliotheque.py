@@ -44,9 +44,31 @@ class Bibliotheque:
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
+    def importer_adherents(self):
+        try:
+            with open("Adherents.csv", "r", encoding="utf-8") as fichier: # Le encoding rend ça capable d'interpréter les accents (é,è,à, etc.)
+
+                lignes2 = fichier.readlines()
+                del lignes2[0] # Supprime la première ligne (qui est les noms de colonne)
+
+                for ligne in lignes2:
+
+                    ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
+                    e = ligne.split(",")
+                    titre = e[0]
+                    isbn = e[1]
+                    quantite = int(e[2])
+                    auteur = e[3]
+                    nouveau_doc =Livre(titre, isbn, quantite, auteur)
+                    self.liste_documents.append(nouveau_doc)
+
+        except FileNotFoundError:
+            print("❌ Erreur : Le fichier n'existe pas.")
+
+
 
     @staticmethod
-    def afficherListeDocs():
+    def afficher_liste_docs():
         print("=== Liste de documents ===")
         try:
             with open("Documents.csv", "r") as fichier:
@@ -58,7 +80,7 @@ class Bibliotheque:
             print("❌ Erreur : Le fichier n'existe pas.")
 
     @staticmethod
-    def afficherListeEmprunts():
+    def afficher_liste_emprunts():
         print("=== Liste d'Emprunts ===")
         try:
             with open("Emprunts.csv", "r") as fichier:
@@ -70,7 +92,7 @@ class Bibliotheque:
             print("❌ Erreur : Le fichier n'existe pas.")
 
     @staticmethod
-    def afficherListeAdherents():
+    def afficher_liste_adherents():
         print("=== Liste d'adhérents ===")
         try:
             with open("Adherents.csv", "r") as fichier:
@@ -82,7 +104,7 @@ class Bibliotheque:
             print("❌ Erreur : Le fichier n'existe pas.")
 
     @staticmethod
-    def ajouterAd():
+    def ajouter_ad():
         while True:
             print("=== Ajouter un adhérent ===")
 
@@ -115,13 +137,13 @@ class Bibliotheque:
                 else:
                     print("❌ Réponse non valide, veuillez répondre par 'Oui' ou 'Non'")
 
-    def enleverAd(self):
+    def enlever_ad(self):
         pass
 
-    def ajouterDoc(self):
+    def ajouter_doc(self):
         pass
 
-    def enleverDoc(self):
+    def enlever_doc(self):
         pass
 
 
