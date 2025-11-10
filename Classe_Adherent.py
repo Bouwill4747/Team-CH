@@ -30,9 +30,9 @@ class Adherent:
         # Et ici j'me demande si on devrait pas demander d'entrer un nom d'adhérent, ensuite afficher les
         # livres qu'il a empruntés, et ensuite demander d'entrer l'ISBN du livre à rendre.
 
-        adherent = input("Veuillez saisir l'ID d'adhérent : ")
-        for x in bibliotheque.liste_adherents:
-            if x.
+        # adherent = input("Veuillez saisir l'ID d'adhérent : ")
+        # for x in bibliotheque.liste_adherents:
+        #     if x.
 
         pass
 

@@ -1,16 +1,16 @@
 titre,isbn,quantite,auteur,qte_dispo
-The Catcher in the Rye,9.78032E+12,5,J.D. Salinger,5
-To Kill a Mockingbird,9.78006E+12,8,Harper Lee,8
-1984,9.78045E+12,10,George Orwell,10
-Brave New World,9.78006E+12,6,Aldous Huxley,6
-The Great Gatsby,9.78074E+12,4,F. Scott Fitzgerald,4
-Fahrenheit 451,9.78145E+12,7,Ray Bradbury,7
-Moby-Dick,9.7815E+12,3,Herman Melville,3
-Pride and Prejudice,9.7815E+12,9,Jane Austen,9
-The Hobbit,9.78055E+12,12,J.R.R. Tolkien,12
-Animal Farm,9.78045E+12,2,George Orwell,2
-The Lord of the Rings,9.78062E+12,5,J.R.R. Tolkien,5
-Jane Eyre,9.7815E+12,1,Charlotte Brontë,1
-Crime and Punishment,9.78049E+12,1,Fyodor Dostoevsky,1
-Wuthering Heights,9.78151E+12,1,Emily Brontë,1
-The Picture of Dorian Gray,9.78014E+12,6,Oscar Wilde,6
+The Catcher in the Rye,10000,5,J.D. Salinger,5
+To Kill a Mockingbird,10001,8,Harper Lee,8
+1984,10002,10,George Orwell,10
+Brave New World,10003,6,Aldous Huxley,6
+The Great Gatsby,100004,4,F. Scott Fitzgerald,4
+Fahrenheit 451,100005,7,Ray Bradbury,7
+Moby-Dick,100006,3,Herman Melville,3
+Pride and Prejudice,100007,9,Jane Austen,9
+The Hobbit,100008,12,J.R.R. Tolkien,12
+Animal Farm,100009,2,George Orwell,2
+The Lord of the Rings,100010,5,J.R.R. Tolkien,5
+Jane Eyre,100011,1,Charlotte Brontë,1
+Crime and Punishment,100012,1,Fyodor Dostoevsky,1
+Wuthering Heights,100013,1,Emily Brontë,1
+The Picture of Dorian Gray,100014,6,Oscar Wilde,6
