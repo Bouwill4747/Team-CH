@@ -7,13 +7,11 @@ class Adherent:
         self.prenom = prenom
         self.id = id_adherent
 
-    # On a une décision à prendre concernant les interactions reliées à ces 2 méthodes-là... Mes propositions seraient
-    # plus compliquées mais pretty cool.
-
     def emprunter_livre(self, bibliotheque, livre):
 
-        # J'me demande si on devrait pas plutôt afficher la liste de documents
-        # disponibles et demander à l'utilisateur d'entrer l'ISBN pour l'emprunter...
+        # Demander l'ID d'adhérent
+        # Afficher les documents dispos avec ISBN et qté dispo
+        # Entrer l'ISBN que vous voulez emprunter
 
         if livre.dispo and bibliotheque.livre_existe(livre.titre):
             emprunt = Emprunt(self, livre)
@@ -22,10 +20,19 @@ class Adherent:
         else:
             print("Ce livre n'est pas disponible ou n'existe pas.")
 
-    def rendre_livre(self, livre):
+    def rendre_livre(self, bibliotheque, livre):
 
+        # Demander ID adhérent
+        # Classer les emprunts avec un numméro devant
+        # Afficher les emprunts de cet adhérent la (avec leur numéro à leur gauche)
+        # Le user tape un numéro pour choisir quel emprunt rendre
+        #
         # Et ici j'me demande si on devrait pas demander d'entrer un nom d'adhérent, ensuite afficher les
         # livres qu'il a empruntés, et ensuite demander d'entrer l'ISBN du livre à rendre.
+
+        adherent = input("Veuillez saisir l'ID d'adhérent : ")
+        for x in bibliotheque.liste_adherents:
+            if x.
 
         pass
 

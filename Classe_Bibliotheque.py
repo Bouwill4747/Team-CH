@@ -12,16 +12,16 @@ class Bibliotheque:
         self.liste_documents = []
         self.liste_adherents = []
         self.importer_docs() # Importe automatiquement les documents quand la bibliothèque est créée
-        # self.importer_adherents() *à faire*
+        # self.importer_adherents() *à faire (eric)*
 
     def __str__(self):
         return self.nomBibliotheque
 
-    def livre_existe(self, titre: str):
-        for x in self.liste_documents:
-            if x.titre == titre: # Reste à rendre ça case insensitive
-                return True
-        return False
+    # def livre_existe(self, titre: str):
+    #     for x in self.liste_documents:
+    #         if x.titre == titre: # Reste à rendre ça case insensitive
+    #             return True
+    #     return False
 
     def importer_docs(self):
         try:
