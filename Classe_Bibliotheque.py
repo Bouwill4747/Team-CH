@@ -1,5 +1,6 @@
 import csv
 from Classe_Document import *
+from Classe_Adherent import Adherent
 
 class Bibliotheque:
 
@@ -12,7 +13,7 @@ class Bibliotheque:
         self.liste_documents = []
         self.liste_adherents = []
         self.importer_docs() # Importe automatiquement les documents quand la bibliothèque est créée
-        # self.importer_adherents() *à faire (eric)*
+        self.importer_adherents() # Importe automatiquement les adhérents quand la bibliothèque est créée
 
     def __str__(self):
         return self.nomBibliotheque
@@ -46,21 +47,19 @@ class Bibliotheque:
 
     def importer_adherents(self):
         try:
-            with open("Adherents.csv", "r", encoding="utf-8") as fichier: # Le encoding rend ça capable d'interpréter les accents (é,è,à, etc.)
+            with open("Adherents.csv", "r", encoding="utf-8") as fichier:
+                lignes = fichier.readlines()
+                del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
 
-                lignes2 = fichier.readlines()
-                del lignes2[0] # Supprime la première ligne (qui est les noms de colonne)
-
-                for ligne in lignes2:
+                for ligne in lignes:
 
                     ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
                     e = ligne.split(",")
-                    titre = e[0]
-                    isbn = e[1]
-                    quantite = int(e[2])
-                    auteur = e[3]
-                    nouveau_doc =Livre(titre, isbn, quantite, auteur)
-                    self.liste_documents.append(nouveau_doc)
+                    no_adherent = int(e[0])
+                    nom = e[1]
+                    prenom = e[2]
+                    nouvel_adherent = Adherent(nom, prenom, no_adherent)
+                    self.liste_adherents.append(nouvel_adherent)
 
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
@@ -148,4 +147,3 @@ class Bibliotheque:
 
 
 nomBibliotheque = Bibliotheque("Ma Bibliothèque")
-nomBibliotheque.importer_docs()
