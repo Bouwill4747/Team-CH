@@ -57,38 +57,37 @@ if __name__ == "__main__":
         if choix == 'Q':
             print("\nMerci d'avoir utilisé la bibliothèque ! À bientôt 👋")
             break
-        elif choix == "1":
+        elif choix == 1:
             Bibliotheque.ajouter_ad()
 
-        elif choix == '2':
+        elif choix == 2:
             Bibliotheque.enlever_ad()
 
-        elif choix == '3':
+        elif choix == 3:
             Bibliotheque.afficher_liste_adherents()
 
-        elif choix == '4':
+        elif choix == 4:
             Bibliotheque.ajouter_doc()
 
-        elif choix == '5':
+        elif choix == 5:
             Bibliotheque.enlever_doc()
 
-        elif choix == '6':
+        elif choix == 6:
             biblio1.afficher_liste_docs()
 
-        elif choix == '7':
+        elif choix == 7:
             Adherent.emprunter_livre()
 
-        elif choix == '8':
+        elif choix == 8:
             Adherent.rendre_livre()
 
-        elif choix == '9':
+        elif choix == 9:
             Bibliotheque.afficher_liste_emprunts()
 
-        elif choix == '10':
-            pass # Quand on va caller ça, on va demander de combien de jours il faut prolonger l'emprunt
-            # Emprunt.prolonger_date_retour(jours_extra: int)
+        elif choix == 10:
+            pass
 
-        elif choix == '11':
+        elif choix == 11:
             sauvegarder_modification()
 
 

@@ -16,7 +16,7 @@ biblio1 = Bibliotheque("Ma Bibliothèque")
 biblio1.importer_docs()
 
 print("************************************************************")
-print("*             === Liste d'Emprunts ===                     *")
+print("*             === Liste documents ===                      *")
 print("************************************************************")
 
 for doc in biblio1.liste_documents:
