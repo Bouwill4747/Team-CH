@@ -3,10 +3,10 @@ from Classe_Adherent import Adherent
 from Classe_Emprunt import Emprunt
 from Classe_Document import *
 
-def sauvegarderModification():
+def sauvegarder_modification():
     pass
 
-def afficherMenu(nom_biblio="Bibliotheque BDEB"):
+def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
     # Titre principal
     print("************************************************************")
@@ -49,43 +49,43 @@ def afficherMenu(nom_biblio="Bibliotheque BDEB"):
 # --- Main :) ---
 if __name__ == "__main__":
     while True:
-        choix = afficherMenu("Bibliotheque BDEB")
+        choix = afficher_menu("Bibliotheque BDEB")
         if choix == 'Q':
             print("\nMerci d'avoir utilisé la bibliothèque ! À bientôt 👋")
             break
         elif choix.upper() == '1':
-            Bibliotheque.ajouterAd()
+            Bibliotheque.ajouter_ad()
 
         elif choix.upper() == '2':
-            Bibliotheque.enleverAd()
+            Bibliotheque.enlever_ad()
 
         elif choix.upper() == '3':
-            Bibliotheque.afficherListeAdherents()
+            Bibliotheque.afficher_liste_adherents()
 
         elif choix.upper() == '4':
-            Bibliotheque.ajouterDoc()
+            Bibliotheque.ajouter_doc()
 
         elif choix.upper() == '5':
-            Bibliotheque.enleverDoc()
+            Bibliotheque.enlever_doc()
 
         elif choix.upper() == '6':
-            Bibliotheque.afficherListeDocs()
+            Bibliotheque.afficher_liste_docs()
 
         elif choix.upper() == '7':
-            Adherent.emprunterLivre()
+            Adherent.emprunter_livre()
 
         elif choix.upper() == '8':
-            Adherent.rendreLivre()
+            Adherent.rendre_livre()
 
         elif choix.upper() == '9':
-            Bibliotheque.afficherListeEmprunts()
+            Bibliotheque.afficher_liste_emprunts()
 
         elif choix.upper() == '10':
             pass # Quand on va caller ça, on va demander de combien de jours il faut prolonger l'emprunt
             # Emprunt.prolonger_date_retour(jours_extra: int)
 
         elif choix.upper() == '11':
-            sauvegarderModification()
+            sauvegarder_modification()
 
         else:
             print(f"\n→ Vous avez choisi l'option {choix}\n")
