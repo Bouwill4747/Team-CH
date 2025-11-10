@@ -1,17 +1,31 @@
 import csv
 from Classe_Document import *
+
 class Bibliotheque:
+
     def __init__(self, nomBibliotheque):
         self.nomBibliotheque = nomBibliotheque
+        self.liste_emprunts = []
+        # Au lieu que, comme avant, liste_documents soit une variable isolée qu'on doive "return" pour la rendre
+        # accessible, maintenant c'est un attribut de la bibliothèque qui peut être accédé de partout (tant que
+        # la bibliothèque est fournie en tant qu'input, ou dans le "main" où elle sera créée).
+        self.liste_documents = []
+        self.liste_adherents = []
+        self.importer_docs() # Importe automatiquement les documents quand la bibliothèque est créée
+        # self.importer_adherents() *à faire (eric)*
 
     def __str__(self):
         return self.nomBibliotheque
 
-    @staticmethod
-    def importer_docs():
-        documents = []
+    # def livre_existe(self, titre: str):
+    #     for x in self.liste_documents:
+    #         if x.titre == titre: # Reste à rendre ça case insensitive
+    #             return True
+    #     return False
+
+    def importer_docs(self):
         try:
-            with open("livres.csv", "r") as fichier:
+            with open("livres.csv", "r", encoding="utf-8") as fichier: # Le encoding rend ça capable d'interpréter les accents (é,è,à, etc.)
 
                 lignes = fichier.readlines()
                 del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
@@ -24,14 +38,11 @@ class Bibliotheque:
                     isbn = e[1]
                     quantite = int(e[2])
                     auteur = e[3]
-
                     nouveau_doc =Livre(titre, isbn, quantite, auteur)
-                    documents.append(nouveau_doc)
+                    self.liste_documents.append(nouveau_doc)
 
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
-
-        return documents
 
 
     @staticmethod
