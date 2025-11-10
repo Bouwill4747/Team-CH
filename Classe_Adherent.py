@@ -9,16 +9,20 @@ class Adherent:
 
     def emprunter_livre(self, bibliotheque, livre):
 
-        # Demander l'ID d'adhérent
         # Afficher les documents dispos avec ISBN et qté dispo
-        # Entrer l'ISBN que vous voulez emprunter
+        for x in bibliotheque.liste_documents:
+            if x.dispo:
+                print(x)
 
-        if livre.dispo and bibliotheque.livre_existe(livre.titre):
-            emprunt = Emprunt(self, livre)
-            livre.qte_dispo -= 1
-            bibliotheque.liste_emprunts.append(emprunt)
-        else:
-            print("Ce livre n'est pas disponible ou n'existe pas.")
+        # Entrer l'ISBN que vous voulez emprunter
+        choix_isbn = input("Veuillez saisir l'ISBN du livre à emprunter : ")
+        for x in bibliotheque.liste_documents:
+            if x.isbn == choix_isbn:
+                choix_livre = x
+                break
+        emprunt = Emprunt(self, choix_livre)
+        livre.qte_dispo -= 1
+        bibliotheque.liste_emprunts.append(emprunt)
 
     def rendre_livre(self, bibliotheque, livre):
 
@@ -35,4 +39,3 @@ class Adherent:
         #     if x.
 
         pass
-
