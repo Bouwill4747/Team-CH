@@ -71,8 +71,15 @@ class Bibliotheque:
         print("*             === Liste documents ===                      ")
         print("**")
 
+    @staticmethod
+    def afficher_liste_docs(self):
+
+        print("************************************************************")
+        print("*             === Liste documents ===                      *") # :)
+        print("************************************************************")
+
         for doc in self.liste_documents:
-            dash_line = '-'(len(doc.titre) + 4)
+            dash_line = '-' * (len(doc.titre) + 4)
             print(f"\n |{dash_line}|\n"
                   f" |  {doc.titre}  |\n"
                   f" |{dash_line}|\n"

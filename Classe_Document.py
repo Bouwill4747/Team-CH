@@ -75,7 +75,7 @@ class Livre(Volume):
         return self.qte_dispo > 0
 
     def __str__(self):
-        return (f"({self.type_document}) {self.titre}, ISBN: {self.isbn}, auteur: {self.auteur}, "
+        return (f"({self.type_document}) {self.titre} | ISBN: {self.isbn} | Auteur: {self.auteur} | "
                 f"Quantité disponible: {self.qte_dispo}/{self.quantite}")
 
     def aug_quantite(self, qte_aug: int):
