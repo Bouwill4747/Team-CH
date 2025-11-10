@@ -68,16 +68,14 @@ class Bibliotheque:
 
 
     @staticmethod
-    def afficher_liste_docs():
-        print("=== Liste de documents ===")
-        try:
-            with open("Documents.csv", "r") as fichier:
-                reader = csv.reader(fichier, delimiter=",")
-                next(reader)
-                for ligne in reader:
-                    print(ligne[0] + " " + ligne[1] + " " + ligne[2])
-        except FileNotFoundError:
-            print("❌ Erreur : Le fichier n'existe pas.")
+    def afficher_liste_docs(self):
+
+        for doc in self.liste_documents:
+            dash_line = '-' * (len(doc.titre) + 4)
+            print(f"\n |{dash_line}|\n"
+                  f" |  {doc.titre}  |\n"
+                  f" |{dash_line}|\n"
+                  f"Titre : {doc.auteur} | Quantité : {str(doc.quantite)} | ISBN : {doc.isbn}\n")
 
     @staticmethod
     def afficher_liste_emprunts():

@@ -48,51 +48,53 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
 # --- Main :) ---
 if __name__ == "__main__":
+
+    biblio1 = Bibliotheque("Bibliotheque BDEB")
+    biblio1.importer_docs()
+
     while True:
         choix = afficher_menu("Bibliotheque BDEB")
         if choix == 'Q':
             print("\nMerci d'avoir utilisé la bibliothèque ! À bientôt 👋")
             break
-        elif choix.upper() == '1':
+        elif choix == "1":
             Bibliotheque.ajouter_ad()
 
-        elif choix.upper() == '2':
+        elif choix == '2':
             Bibliotheque.enlever_ad()
 
-        elif choix.upper() == '3':
+        elif choix == '3':
             Bibliotheque.afficher_liste_adherents()
 
-        elif choix.upper() == '4':
+        elif choix == '4':
             Bibliotheque.ajouter_doc()
 
-        elif choix.upper() == '5':
+        elif choix == '5':
             Bibliotheque.enlever_doc()
 
-        elif choix.upper() == '6':
-            Bibliotheque.afficher_liste_docs()
+        elif choix == '6':
+            biblio1.afficher_liste_docs()
 
-        elif choix.upper() == '7':
+        elif choix == '7':
             Adherent.emprunter_livre()
 
-        elif choix.upper() == '8':
+        elif choix == '8':
             Adherent.rendre_livre()
 
-        elif choix.upper() == '9':
+        elif choix == '9':
             Bibliotheque.afficher_liste_emprunts()
 
-        elif choix.upper() == '10':
+        elif choix == '10':
             pass # Quand on va caller ça, on va demander de combien de jours il faut prolonger l'emprunt
             # Emprunt.prolonger_date_retour(jours_extra: int)
 
-        elif choix.upper() == '11':
+        elif choix == '11':
             sauvegarder_modification()
 
-        else:
-            print(f"\n→ Vous avez choisi l'option {choix}\n")
-            input("Appuyez sur Entrée pour revenir au menu...")
 
 
-documents = Bibliotheque.importer_docs()
-print(documents[2].isbn)
-print(documents[2].quantite)
-print(documents[2].auteur)
+
+# documents = Bibliotheque.importer_docs()
+# print(documents[2].isbn)
+# print(documents[2].quantite)
+# print(documents[2].auteur)
