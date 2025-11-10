@@ -71,7 +71,7 @@ class Bibliotheque:
     def afficher_liste_docs(self):
 
         print("************************************************************")
-        print("*             === Liste documents ===                      *")
+        print("*             === Liste documents ===                      *") # :)
         print("************************************************************")
 
         for doc in self.liste_documents:
