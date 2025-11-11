@@ -7,7 +7,7 @@ class Adherent:
         self.prenom = prenom
         self.id = id_adherent
 
-    def emprunter_livre(self, bibliotheque, livre):
+    def emprunter_livre(self, bibliotheque):
 
         # Afficher les documents dispos avec ISBN et qté dispo
         for x in bibliotheque.liste_documents:
@@ -16,12 +16,13 @@ class Adherent:
 
         # Entrer l'ISBN que vous voulez emprunter
         choix_isbn = input("Veuillez saisir l'ISBN du livre à emprunter : ")
+        choix_livre = None
         for x in bibliotheque.liste_documents:
             if x.isbn == choix_isbn:
                 choix_livre = x
                 break
-        emprunt = Emprunt(self, choix_livre)
-        livre.qte_dispo -= 1
+        emprunt = Emprunt(self, bibliotheque, choix_livre)
+        choix_livre.qte_dispo -= 1
         bibliotheque.liste_emprunts.append(emprunt)
 
     def rendre_livre(self, bibliotheque, livre):
