@@ -1,8 +1,8 @@
-Numero_Emprunt,ID_Adherent,Nom,Titre_Livre,ISBN
-1,1,Perlin,Animal Farm,9.78045E+12
-2,2,Julie,Jane Eyre,9.7815E+12
-3,3,Mathieu,The Catcher in the Rye,9.78032E+12
-4,4,Fernand,Wuthering Heights,9.78151E+12
-5,5,Bros,Fahrenheit 451,9.78145E+12
-6,6,Allo,The Hobbit,9.78055E+12
-7,7,Bond,1984,9.78045E+12
+id_adherent,ISBN,Numero_Emprunt,
+1,100000,1,
+2,100001,2,
+3,100002,3,
+4,100003,4,
+5,100004,5,
+6,100005,6,
+7,100006,7,

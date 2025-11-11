@@ -6,36 +6,36 @@ from Classe_Document import *
 def sauvegarder_modification():
     pass
 
+def retour_au_menu():
+    input("\n👆 Appuyez sur Entrée pour retourner au menu...\n")
+
 def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
-    # Titre principal
-    print("************************************************************")
-    print(f"*   Bienvenue à votre bibliothèque : {nom_biblio.center(25)}*")
-    print("************************************************************")
-    print("*                Faites un choix :                         *")
-    print("************************************************************")
+    print("=" * 60)
+    print(f"🌟  BIENVENUE À {nom_biblio.upper()}  🌟")
+    print("=" * 60)
+    print("Choisissez une option :")
+    print("-" * 40)
 
-    # Liste des options
-    options = [
-        "1   Ajouter adhérent",
-        "2   Supprimer adhérent",
-        "3   Afficher tous les adhérents",
-        "4   Ajouter document",
-        "5   Supprimer document",
-        "6   Afficher tous les documents",
-        "7   Ajouter emprunt",
-        "8   Retour d’un emprunt",
-        "9   Afficher tous les emprunts",
-        "10  Prolonger un emprunt",
-        "11  Sauvegarder les modifications",
-        "Q   Quitter le programme"
+    menu_items = [
+        (1, "Ajouter adhérent 👴"),
+        (2, "Supprimer adhérent🤵 "),
+        (3, "Afficher tous les adhérents 👨‍💼"),
+        (4, "Ajouter document 📘"),
+        (5, "Supprimer document 🚨"),
+        (6, "Afficher tous les documents 📃"),
+        (7, "Emprunter un livre 📗"),
+        (8, "Retour d'un emprunt 📕"),
+        (9, "Afficher tous les emprunts 📃"),
+        (10, "Prolonger un emprunt 📈"),
+        (11, "Sauvegarder les modifications ✅"),
+        ("Q", "Quitter le programme ❌")
     ]
 
-    # Affichage des options
-    for ligne in options:
-        print(f"*   {ligne.ljust(52)}*")
+    for key, desc in menu_items:
+        print(f"  {key:2} - {desc}")
 
-    print("************************************************************")
+    print("=" * 60)
 
     # Boucle de saisie utilisateur
     while True:
@@ -50,7 +50,6 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 if __name__ == "__main__":
 
     biblio1 = Bibliotheque("Bibliotheque BDEB")
-    biblio1.importer_docs()
 
     while True:
         choix = afficher_menu("Bibliotheque BDEB")
@@ -74,9 +73,12 @@ if __name__ == "__main__":
 
         elif choix == 6:
             biblio1.afficher_liste_docs()
+            retour_au_menu()
 
         elif choix == 7:
-            Adherent.emprunter_livre()
+            Adherent.emprunter_livre(biblio1)
+            print(biblio1.liste_emprunts[0])
+            retour_au_menu()
 
         elif choix == 8:
             Adherent.rendre_livre()
@@ -89,11 +91,3 @@ if __name__ == "__main__":
 
         elif choix == 11:
             sauvegarder_modification()
-
-
-
-
-# documents = Bibliotheque.importer_docs()
-# print(documents[2].isbn)
-# print(documents[2].quantite)
-# print(documents[2].auteur)
