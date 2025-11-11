@@ -64,17 +64,9 @@ class Bibliotheque:
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
-    @staticmethod
     def afficher_liste_docs(self):
 
-        print("**")
-        print("*             === Liste documents ===                      ")
-        print("**")
-
-    @staticmethod
-    def afficher_liste_docs(self):
-
-        print("************************************************************")
+        print("\n************************************************************")
         print("*             === Liste documents ===                      *") # :)
         print("************************************************************")
 
@@ -144,12 +136,15 @@ class Bibliotheque:
                     print("❌ Réponse non valide, veuillez répondre par 'Oui' ou 'Non'")
 
     def enlever_ad(self):
+
         pass
 
     def ajouter_doc(self):
+
         pass
 
     def enlever_doc(self):
+
         pass
 
 
