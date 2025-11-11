@@ -7,21 +7,59 @@ class Adherent:
         self.prenom = prenom
         self.id = id_adherent
 
-    def emprunter_livre(self, bibliotheque):
+    @staticmethod
+    def emprunter_livre(bibliotheque):
+
+        while True:
+            while True:
+                try:
+                    id_adherent = int(input("Veuillez saisir l'ID de l'adhérent : "))
+                    if id_adherent <= 0:
+                        print("❌ L'ID doit être un nombre positif!")
+                        continue
+                    break
+                except ValueError:
+                    print("❌ Veuillez entrer un nombre valide pour l'ID!")
+
+            choix_adherent = None
+            for x in bibliotheque.liste_adherents:
+                if x.id == id_adherent:
+                    choix_adherent = x
+                    break
+
+            if choix_adherent is not None:
+                break
+            else:
+                print("❌ Aucun adhérent trouvé avec cet ID!")
+                print("Veuillez réessayer...\n")
 
         # Afficher les documents dispos avec ISBN et qté dispo
+        print("-" * 60)
+        print("📚 Documents disponibles :")
+        print("-" * 120)
         for x in bibliotheque.liste_documents:
-            if x.dispo:
+            if x.dispo and x.qte_dispo > 0:
                 print(x)
 
         # Entrer l'ISBN que vous voulez emprunter
-        choix_isbn = input("Veuillez saisir l'ISBN du livre à emprunter : ")
-        choix_livre = None
-        for x in bibliotheque.liste_documents:
-            if x.isbn == choix_isbn:
-                choix_livre = x
+        while True:
+            print("-" * 120)
+            choix_isbn = input("Veuillez saisir l'ISBN du livre à emprunter : ").strip()
+
+            choix_livre = None
+            for x in bibliotheque.liste_documents:
+                if x.isbn == choix_isbn:
+                    choix_livre = x
+                    break
+
+            if choix_livre is not None:
+                print("-" * 60)
                 break
-        emprunt = Emprunt(self, bibliotheque, choix_livre)
+            else:
+                print("❌ ISBN non trouvé ou livre non disponible!")
+                print("Veuillez réessayer...\n")
+
+        emprunt = Emprunt(choix_adherent, bibliotheque, choix_livre)
         choix_livre.qte_dispo -= 1
         bibliotheque.liste_emprunts.append(emprunt)
 

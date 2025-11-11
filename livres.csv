@@ -1,8 +1,8 @@
 titre,isbn,quantite,auteur,qte_dispo
-The Catcher in the Rye,10000,5,J.D. Salinger,5
-To Kill a Mockingbird,10001,8,Harper Lee,8
-1984,10002,10,George Orwell,10
-Brave New World,10003,6,Aldous Huxley,6
+The Catcher in the Rye,100000,5,J.D. Salinger,5
+To Kill a Mockingbird,100001,8,Harper Lee,8
+1984,100002,10,George Orwell,10
+Brave New World,100003,6,Aldous Huxley,6
 The Great Gatsby,100004,4,F. Scott Fitzgerald,4
 Fahrenheit 451,100005,7,Ray Bradbury,7
 Moby-Dick,100006,3,Herman Melville,3

@@ -5,5 +5,5 @@ from Classe_Emprunt import Emprunt
 from Classe_Bibliotheque import Bibliotheque
 
 biblio = Bibliotheque("Bibliothèque BdeB")
-biblio.liste_adherents[0].emprunter_livre(biblio)
+Adherent.emprunter_livre(biblio)
 print(biblio.liste_emprunts[0])
