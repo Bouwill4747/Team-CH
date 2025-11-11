@@ -7,7 +7,7 @@ def sauvegarder_modification():
     pass
 
 def retour_au_menu():
-    input("\n👆 Appuyez sur Entrée pour retourner au menu...")
+    input("\n👆 Appuyez sur Entrée pour retourner au menu...\n")
 
 def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
@@ -24,7 +24,7 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
         (4, "Ajouter document 📘"),
         (5, "Supprimer document 🚨"),
         (6, "Afficher tous les documents 📃"),
-        (7, "Ajouter emprunt 📗"),
+        (7, "Emprunter un livre 📗"),
         (8, "Retour d'un emprunt 📕"),
         (9, "Afficher tous les emprunts 📃"),
         (10, "Prolonger un emprunt 📈"),
@@ -50,7 +50,6 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 if __name__ == "__main__":
 
     biblio1 = Bibliotheque("Bibliotheque BDEB")
-    biblio1.importer_docs()
 
     while True:
         choix = afficher_menu("Bibliotheque BDEB")
@@ -77,7 +76,9 @@ if __name__ == "__main__":
             retour_au_menu()
 
         elif choix == 7:
-            Adherent.emprunter_livre()
+            Adherent.emprunter_livre(biblio1)
+            print(biblio1.liste_emprunts[0])
+            retour_au_menu()
 
         elif choix == 8:
             Adherent.rendre_livre()
