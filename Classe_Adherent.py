@@ -24,6 +24,9 @@ class Adherent:
         livre.qte_dispo -= 1
         bibliotheque.liste_emprunts.append(emprunt)
 
+# Dans la liste emprunt, Adhérant, Livre et Date
+
+
     def rendre_livre(self, bibliotheque, livre):
 
         # Demander ID adhérent
