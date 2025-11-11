@@ -1,34 +1,26 @@
+import csv
 from Classe_Document import *
 from Classe_Adherent import Adherent
+from Classe_Emprunt import Emprunt
 
 class Bibliotheque:
 
-    def __init__(self, nomBibliotheque):
-        self.nomBibliotheque = nomBibliotheque
-        # Au lieu que, comme avant, liste_documents soit une variable isolée qu'on doive "return" pour la rendre
-        # accessible, maintenant c'est un attribut de la bibliothèque qui peut être accédé de partout (tant que
-        # la bibliothèque est fournie en tant qu'input, ou dans le "main" où elle sera créée).
+    def __init__(self, nom_bibliotheque):
+        self.nom_bibliotheque = nom_bibliotheque
+        self.liste_emprunts = []
         self.liste_documents = []
         self.liste_adherents = []
-        self.liste_emprunts = [] # À voir si on en aura réellement besoin
         self.importer_docs() # Importe automatiquement les documents quand la bibliothèque est créée
         self.importer_adherents() # Importe automatiquement les adhérents quand la bibliothèque est créée
         self.importer_emprunts() # Importe automatiquement les emprunts quand la bibliothèque est créée
 
     def __str__(self):
-        return self.nomBibliotheque
-
-    # def livre_existe(self, titre: str):
-    #     for x in self.liste_documents:
-    #         if x.titre == titre: # Reste à rendre ça case insensitive
-    #             return True
-    #     return False
-
+        return self.nom_bibliotheque
 
 # Importe et crée une liste de documents avec attributs : titre, isbn, quantite, auteur
     def importer_docs(self):
         try:
-            with open("livres.csv", "r", encoding="utf-8") as fichier: # Le encoding rend ça capable d'interpréter les accents (é,è,à, etc.)
+            with open("livres.csv", "r", encoding="utf-8") as fichier:
 
                 lignes = fichier.readlines()
                 del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
@@ -47,11 +39,10 @@ class Bibliotheque:
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
-
 # Importe et crée une liste d'adhérents avec les attributs : nom, prenom, no_adherent
     def importer_adherents(self):
         try:
-            with open("Adherents.csv", "r", encoding="utf-8") as fichier:
+            with open("adherents.csv", "r", encoding="utf-8") as fichier:
                 lignes = fichier.readlines()
                 del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
                 for ligne in lignes:
@@ -62,28 +53,35 @@ class Bibliotheque:
                     prenom = e[2]
                     nouvel_adherent = Adherent(nom, prenom, no_adherent)
                     self.liste_adherents.append(nouvel_adherent)
+
+        except FileNotFoundError:
+            print("❌ Erreur : Le fichier n'existe pas.")
+
+# Importe et crée une liste d'emprunts avec les attributs : (à voir)
+    def importer_emprunts(self):
+        try:
+            with open("emprunts.csv", "r", encoding="utf-8") as fichier:
+                lignes = fichier.readlines()
+                del lignes[0]  # Supprime la première ligne (qui est les noms de colonne)
+                for ligne in lignes:
+
+                    ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
+                    e = ligne.split(",")
+                    id_adherent = int(e[0])
+                    isbn = e[2]
+                    for x in self.liste_adherents:
+                        if x.id == id_adherent:
+                            adherent = x
+                    for x in self.liste_documents:
+                        if x.isbn == isbn:
+                            livre = x
+                    nouvel_emprunt = Emprunt(adherent, self, livre)
+                    self.liste_emprunts.append(nouvel_emprunt)
+
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
 
-# Importe et crée une liste d'emprunts avec les attributs : (à voir)
-    # def importer_emprunts(self): # ID_Adherent,Nom,Titre_Livre,ISBN : (à voir quand la classe emprunts sera faite)
-    #     try:
-    #         with open("Emprunts1.csv", "r", encoding="utf-8") as fichier:
-    #             lignes = fichier.readlines()
-    #             del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
-    #
-    #        for ligne in lignes:
-    #                ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
-    #               e = ligne.split(",")
-    #                no_adherent = int(e[0])
-    #                nom = e[1]
-    #                prenom = e[2]
-    #                nouvel_adherent = Adherent(nom, prenom, no_adherent)
-    #                self.liste_adherents.append(nouvel_adherent)
-
-
-# Affiche la liste complète des documents
     def afficher_liste_docs(self):
         print("============================================================")
         print("                  Liste des documents                       ")
