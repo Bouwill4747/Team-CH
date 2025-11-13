@@ -121,13 +121,13 @@ class Bibliotheque:
             while True:
                 nom = input("Saisissez le nom de l'adhérent : ").strip()
                 if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\-]+$", nom): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
-                    print("Le nom ne peut contenir que des lettres et éventuellement un tiret. Réessayez.")
+                    print("❌ Le nom ne peut contenir que des lettres et éventuellement un tiret. Réessayez.")
                 else:
                     break
             while True:
                 prenom = input("Saisissez le prénom de l'adhérent : ").strip()
                 if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\-]+$", prenom): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
-                    print("Le prénom ne peut contenir que des lettres et éventuellement un tiret. Réessayez.")
+                    print("❌ Le prénom ne peut contenir que des lettres et éventuellement un tiret. \n Réessayez...")
                 else:
                     break
 
@@ -139,7 +139,7 @@ class Bibliotheque:
                         break
 
             if doublon :
-                print(f"L'adhérent {nom}, {prenom} existe déjà. Ajout annulé.")
+                print(f"❌ L'adhérent {nom}, {prenom} existe déjà. Ajout annulé.")
 
             else:
                 # Classer les adhérents avec un numéro devant
@@ -156,7 +156,7 @@ class Bibliotheque:
             while True:
                 choix = input("Voulez-vous ajouter un autre adhérent ? (O/N) : ")
                 if choix.strip().upper() not in ("O", "N"):
-                    print("Sélection invalide")
+                    print("❌ Sélection invalide.")
                     continue # redemande "Voulez-vous ajouter un autre adhérent ? (O/N) : "
                 if choix.strip().upper() == "O":
                     break # Laisse la boucle while continuer = permet un nouvel ajout
@@ -173,7 +173,7 @@ class Bibliotheque:
                 choix_id = input("Saisissez l'ID de l'adhérent à supprimer : ")
                 identifiant = int(choix_id)
             except ValueError:
-                print("Saisie invalide. Entrez un numéro.")
+                print("❌ Saisie invalide. Entrez un numéro.")
                 continue
 
             # Recherche l'adhérent dans la liste
@@ -189,13 +189,13 @@ class Bibliotheque:
                     print(f"Adhérent #{adherent.id} : {adherent.nom} {adherent.prenom} retiré avec succès.")
                     break
             else:
-                print(f"Aucun adhérent trouvé avec l'ID {identifiant}. Réessayez.")
+                print(f"❌ Aucun adhérent trouvé avec l'ID {identifiant}. Réessayez.")
 
             # On demande à l’utilisateur s’il veut supprimer un 2e adhérent ou revenir au menu
             while True:
                 choix = input("Voulez-vous supprimer un autre adhérent ? (O/N) : ")
                 if choix.strip().upper() not in ("O", "N"):
-                    print("Sélection invalide")
+                    print("❌ Sélection invalide.")
                     continue # redemande "Voulez-vous supprimer un autre adhérent ? (O/N) : "
                 if choix.strip().upper() == "O":
                     break # Laisse la boucle while continuer = permet une nouvelle suppression
@@ -216,11 +216,11 @@ class Bibliotheque:
                 try:
                     quantite = int(quantite)
                     if quantite <= 0:
-                        print("La quantité doit être un nombre positif.")
+                        print("❌ La quantité doit être un nombre positif.")
                     else:
                         break  # Sort de la boucle quand la quantité est valide
                 except ValueError:
-                    print("Quantité invalide. Veuillez saisir un nombre entier.")
+                    print("❌ Quantité invalide. Veuillez saisir un nombre entier.")
 
             # Recherche si un document avec le même titre existe déjà dans la liste de documents
             doublon = False
@@ -232,7 +232,7 @@ class Bibliotheque:
                     break
 
             if doublon :
-                choix = input(f"Ce document existe déjà dans la bibliothèque. Voulez-vous augmenter sa quantité? (oui/non")
+                choix = input(f"⚠️ Ce document existe déjà dans la bibliothèque. Voulez-vous augmenter sa quantité? (oui/non")
                 if choix.strip().lower() == "oui": # Augmenter la quantité du document existant ****** À revoir *****
                    doc_existant.quantite += quantite
                    print(f"Quantité mise à jour : {doc_existant.quantite}x «{doc_existant.titre}»")
@@ -247,7 +247,7 @@ class Bibliotheque:
             while True:
                 choix = input("Voulez-vous ajouter un autre document ? (O/N) : ")
                 if choix.strip().upper() not in ("O", "N"):
-                    print("Sélection invalide")
+                    print("❌ Sélection invalide.")
                     continue # redemande "Voulez-vous ajouter un autre document ? (O/N) : "
                 if choix.strip().upper() == "O":
                     break # Laisse la boucle while continuer = permet un nouvel ajout
@@ -274,18 +274,18 @@ class Bibliotheque:
                             f"Titre : «{document.titre}» | Auteur : {document.auteur} | ISBN : {document.isbn} retiré avec succès.")
                         trouve = True
                     else:
-                        print("Suppression annulée.")
+                        print("❌ Suppression annulée.")
 
                     trouve = True
                     break
             if not trouve:
-                print(f"Aucun document avec le numéro ISBN '{choix_document}' trouvé. Réessayez.")
+                print(f"❌ Aucun document avec le numéro ISBN '{choix_document}' trouvé. Réessayez.")
 
             # On demande à l’utilisateur s’il veut supprimer un 2e document ou revenir au menu
             while True:
                 choix = input("Voulez-vous supprimer un autre document ? (O/N) : ")
                 if choix.strip().upper() not in ("O", "N"):
-                    print("Sélection invalide")
+                    print("❌ Sélection invalide.")
                     continue # redemande "Voulez-vous supprimer un autre document ? (O/N) : "
                 if choix.strip().upper() == "O":
                     break # Laisse la boucle while continuer = permet une nouvelle suppression
