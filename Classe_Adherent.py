@@ -152,7 +152,7 @@ class Adherent:
             for emprunt in bibliotheque.liste_emprunts[:]: # Copie de la liste pour éviter les problèmes lors de la suppression
                 if emprunt is a_rendre:
                     # Vérifier et augmenter la quantité disponible
-                    if hasattr(emprunt.livre, 'qte_dispo'):
+                    if hasattr(emprunt.livre, 'qte_dispo'): # hasattr = Vérifie si l'objet livre possède bien un attribut appelé qte_dispo
                         emprunt.livre.qte_dispo += 1
                     else:
                         print("⚠️  Impossible d'augmenter la quantité disponible - attribut manquant")
