@@ -165,3 +165,6 @@ class Adherent:
 
         except Exception as e:
             print(f"❌ Erreur lors du retour du livre: {e}")
+
+    # ajouter confirmer identité :
+    #   "L'adhérent choisi est Ferland Pinpin. Voulez-vous continuer ou choisir un autre adhérent?"

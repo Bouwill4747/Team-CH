@@ -23,6 +23,3 @@ class Emprunt:
 
     def prolonger_date_retour(self, jours_extra: int):
         self.date_retour += timedelta(jours_extra)
-
-
-
