@@ -39,7 +39,7 @@ class Bibliotheque:
         except FileNotFoundError:
             print("❌ Erreur : Le fichier n'existe pas.")
 
-# Importe et crée une liste d'adhérents avec les attributs : nom, prenom, no_adherent
+# Importe et crée une liste d'adhérents avec les attributs : nom, prenom, id_adherent
     def importer_adherents(self):
         try:
             with open("adherents.csv", "r", encoding="utf-8") as fichier:
@@ -48,10 +48,10 @@ class Bibliotheque:
                 for ligne in lignes:
                     ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
                     e = ligne.split(",")
-                    no_adherent = int(e[0])
+                    id = int(e[0])
                     nom = e[1]
                     prenom = e[2]
-                    nouvel_adherent = Adherent(nom, prenom, no_adherent)
+                    nouvel_adherent = Adherent(nom, prenom, id)
                     self.liste_adherents.append(nouvel_adherent)
 
         except FileNotFoundError:
@@ -67,10 +67,10 @@ class Bibliotheque:
 
                     ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
                     e = ligne.split(",")
-                    id_adherent = int(e[0])
+                    id = int(e[0])
                     isbn = e[2]
                     for x in self.liste_adherents:
-                        if x.id == id_adherent:
+                        if x.id == id:
                             adherent = x
                     for x in self.liste_documents:
                         if x.isbn == isbn:
@@ -92,7 +92,7 @@ class Bibliotheque:
             print(f"\n |{dash_line}|\n"
                   f" |  {doc.titre}  |\n"
                   f" |{dash_line}|\n"
-                  f"Titre : {doc.titre} | Auteur : {doc.auteur} | Quantité : {str(doc.quantite)} | ISBN : {doc.isbn}\n")
+                  f"Titre : «{doc.titre}» | Auteur : {doc.auteur} | Quantité : {str(doc.quantite)} | ISBN : {doc.isbn}\n")
 
 
 # Affiche la liste complète des adhérents
@@ -102,22 +102,16 @@ class Bibliotheque:
         print("============================================================")
 
         for adherent in self.liste_adherents:
-            print(f"Nom : {adherent.nom} | Prénom : {str(adherent.prenom)} | # d'adhérent : {adherent.no_adherent}\n")
+            print(f"Nom : {adherent.nom} | Prénom : {str(adherent.prenom)} | # d'adhérent : {adherent.id}\n")
 
 
     def afficher_liste_emprunts(self):
-
         print("============================================================")
         print("                  Liste d'emprunts                          ")
         print("============================================================")
 
-        # for emprunt in self.liste_emprunts:  # À faire quand la classe emprunts sera complétée
-        #     dash_line = '-' * (len(emprunt.titre) + 4)
-        #     print(f"\n |{dash_line}|\n"
-        #           f" |  {doc.titre}  |\n"
-        #           f" |{dash_line}|\n"
-        #           f"Titre : {doc.auteur} | Quantité : {str(doc.quantite)} | ISBN : {doc.isbn}\n")
-
+        for emprunt in self.liste_emprunts:
+            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}. ID d'emprunt : {emprunt.id_emprunt}")
 
     def ajouter_ad(self):
         while True: # boucle interne pour permettre d'ajouter un autre adhérent à la fin de la méthode
@@ -139,16 +133,16 @@ class Bibliotheque:
             else:
                 # faire un compteur +1 chq adhérent.
                 if self.liste_adherents:
-                    max_numero = max(adherent.no_adherent for adherent in self.liste_adherents)
+                    max_numero = max(adherent.id for adherent in self.liste_adherents)
                 else:
                     max_numero = 0
-                no_adherent = max_numero + 1
-                nouvel_adherent = Adherent(nom,prenom,no_adherent)
+                id = max_numero + 1
+                nouvel_adherent = Adherent(nom,prenom,id)
                 self.liste_adherents.append(nouvel_adherent)
-                print(f"Adhérent #{no_adherent} : {nom}, {prenom} ajouté avec succès.")
+                print(f"Adhérent #{id} : {nom}, {prenom} ajouté avec succès.")
 
             # On demande à l’utilisateur s’il veut ajouter un 2e adhérent ou revenir au menu
-            choix = input("Voulez-vous ajouter un autre adhérent ? (O = oui / N = non : retour au menu) : ")
+            choix = input("Voulez-vous ajouter un autre adhérent ? (O/N) : ")
             if choix.strip().upper() == "O":
                 continue # Laisse la boucle while continuer = permet une nouvelle suppression
             else:
@@ -170,16 +164,16 @@ class Bibliotheque:
             # Recherche l'adhérent dans la liste
             trouve = None
             for adherent in self.liste_adherents:
-                if adherent.no_adherent == identifiant:
+                if adherent.id == identifiant:
                     trouve = adherent
             if trouve:
                 self.liste_adherents.remove(trouve)
-                print(f"✅ Adhérent #{trouve.no_adherent} : {trouve.nom_adherent} {trouve.prenom_adherent} retiré avec succès.")
+                print(f"✅ Adhérent #{trouve.id} : {trouve.nom_adherent} {trouve.prenom_adherent} retiré avec succès.")
             else:
                 print(f"Aucun adhérent trouvé avec l'identifiant {identifiant}. Réessayez.")
 
             # On demande à l’utilisateur s’il veut supprimer un 2e adhérent ou revenir au menu
-            choix = input("Voulez-vous supprimer un autre adhérent ? (O = oui / N = non : retour au menu) : ")
+            choix = input("Voulez-vous supprimer un autre adhérent ? (O/N) : ")
             if choix.strip().upper() == "O":
                 continue # Laisse la boucle while continuer = permet une nouvelle suppression
             else:
@@ -192,17 +186,18 @@ class Bibliotheque:
             titre = input("Saisissez le titre du document : ").strip() # strip retire les espaces superflus
             auteur = input("Saisissez l'auteur du document : ").strip()
             isbn = input("Saisissez l'ISBN du document : ").strip()
-            quantite = input("Saisissez la quantité : ").strip()
 
-            # Vérifier que la quantité est un entier
-            try:
-                quantite = int(quantite)
-                if quantite <= 0:
-                    print("❌ La quantité doit être un nombre positif.")
-                    continue
-            except ValueError:
-                print("❌ Quantité invalide. Veuillez saisir un nombre entier.")
-                continue
+            # Boucle qui valide que la quantité est un entier
+            while True:
+                quantite = input("Saisissez la quantité : ").strip()
+                try:
+                    quantite = int(quantite)
+                    if quantite <= 0:
+                        print("❌ La quantité doit être un nombre positif.")
+                    else:
+                        break  # ✅ Sort de la boucle quand la quantité est valide
+                except ValueError:
+                    print("❌ Quantité invalide. Veuillez saisir un nombre entier.")
 
             # Recherche si un document avec le même titre existe déjà dans la liste de documents
             doublon = False
@@ -217,19 +212,20 @@ class Bibliotheque:
                 choix = input(f"Ce document existe déjà dans la bibliothèque. Voulez-vous augmenter sa quantité? (oui/non")
                 if choix.strip().lower() == "oui": # Augmenter la quantité du document existant ****** À revoir *****
                    doc_existant.quantite += quantite
-                   print(f"✅ Quantité mise à jour : {doc_existant.quantite}x {doc_existant.titre}")
+                   print(f"✅ Quantité mise à jour : {doc_existant.quantite}x «{doc_existant.titre}»")
                 else:
-                    continue  # Laisse la boucle while continuer = permet l'ajout d'un nouveau doc
+                    break  # Laisse la boucle while continuer = permet l'ajout d'un nouveau doc
             else: # Si aucun doublon, on crée le nouveau document + on l'ajoute à la liste de docs
                 nouveau_document = Livre(titre,isbn,quantite,auteur)
                 self.liste_documents.append(nouveau_document)
                 print(f"{quantite}x «{titre}» de {auteur} ajouté avec succès.")
 
             # On demande à l’utilisateur s’il veut ajouter un 2e adhérent ou revenir au menu
-            choix2 = input("Voulez-vous ajouter un autre adhérent ? (oui/non) : ")
-            if choix2.strip().lower() == "oui":
-                if choix2.strip().lower() != "oui":
-                    break
+            choix2 = input("Voulez-vous ajouter un autre document ? (O/N) : ")
+            if choix2.strip().upper() == "O":
+                continue  # Laisse la boucle while continuer = permet une nouvelle suppression
+            else:
+                break  # Sort de la boucle interne pour revenir au menu principal
 
 ######## Ajouter si vous ne connaissez pas son ISBN, saisissez le titre du document ? ##########
     def enlever_doc(self):
@@ -237,27 +233,33 @@ class Bibliotheque:
             self.afficher_liste_docs()  # Affiche la liste actuelle des documents
 
             # Saisie du ISBN par l'utilisateur
-            try:
-                choix_document = input("Saisissez l'ISBN du document à supprimer : ")
-                isbn = int(choix_document)
-            except ValueError:
-                print("Saisie invalide. Entrez un numéro ISBN valide.")
-                continue
+            choix_document = input("Saisissez l'ISBN du document à supprimer : ").strip()
 
             # Recherche du document dans la liste
-            trouve = None
+            trouve = False
             for document in self.liste_documents:
-                if document.isbn == isbn:
-                    trouve = isbn
-                if trouve:
-                    self.liste_documents.remove(document)
-                    print(f"✅ Titre : {document.titre} | Quantité : {str(document.auteur)} | ISBN : {document.isbn} retiré avec succès.")
-                else:
-                    print(f"Aucun adhérent avec le numéro {isbn} trouvé. Réessayez.")
+                if document.isbn == choix_document:
+                    confirmation = input( # Confirmation avant la suppression
+                        f"Confirmez-vous la suppression de «{document.titre}» ? (O/N) : ").strip().upper()
+                    if confirmation == "O":
+                        self.liste_documents.remove(document)
+                        print(
+                            f"✅ Titre : «{document.titre}» | Auteur : {document.auteur} | ISBN : {document.isbn} retiré avec succès.")
+                        trouve = True
+                    else:
+                        print("❌ Suppression annulée.")
+
+                    trouve = True
+                    break
+            if not trouve:
+                print(f"❌ Aucun document avec le numéro ISBN '{choix_document}' trouvé. Réessayez.")
 
             # On demande à l’utilisateur s’il veut supprimer un 2e document ou revenir au menu
-            choix = input("Voulez-vous supprimer un autre document ? (O = oui / N = non : retour au menu) : ")
+            choix = input("Voulez-vous supprimer un autre document ? (O/N) : ")
             if choix.strip().upper() == "O":
                 continue # Laisse la boucle while continuer = permet une nouvelle suppression
             else:
                 break # Sort de la boucle interne pour revenir au menu principal
+
+biblio1 = Bibliotheque("biblio1")
+biblio1.ajouter_doc()
