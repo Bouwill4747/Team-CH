@@ -57,19 +57,19 @@ if __name__ == "__main__":
             print("\nMerci d'avoir utilisé la bibliothèque ! À bientôt 👋")
             break
         elif choix == 1:
-            Bibliotheque.ajouter_ad()
+            biblio1.ajouter_ad()
 
         elif choix == 2:
-            Bibliotheque.enlever_ad()
+            biblio1.enlever_ad()
 
         elif choix == 3:
-            Bibliotheque.afficher_liste_adherents()
+            biblio1.afficher_liste_adherents()
 
         elif choix == 4:
-            Bibliotheque.ajouter_doc()
+            biblio1.ajouter_doc()
 
         elif choix == 5:
-            Bibliotheque.enlever_doc()
+            biblio1.enlever_doc()
 
         elif choix == 6:
             biblio1.afficher_liste_docs()
