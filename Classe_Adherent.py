@@ -121,3 +121,7 @@ class Adherent:
                 bibliotheque.liste_emprunts.remove(emprunt)
                 print("Emprunt complété avec succès!")
                 break
+
+
+    # ajouter confirmer identité :
+    #   "L'adhérent choisi est Ferland Pinpin. Voulez-vous continuer ou choisir un autre adhérent?"

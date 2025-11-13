@@ -3,9 +3,6 @@ from Classe_Adherent import Adherent
 from Classe_Emprunt import Emprunt
 from Classe_Document import *
 
-def sauvegarder_modification():
-    pass
-
 def retour_au_menu():
     input("\n👆 Appuyez sur Entrée pour retourner au menu...\n")
 
@@ -90,4 +87,5 @@ if __name__ == "__main__":
             pass
 
         elif choix == 11:
-            sauvegarder_modification()
+            chemin = "livres1.csv"
+            Bibliotheque.sauvegarder_livres(biblio1, chemin)

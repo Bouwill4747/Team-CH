@@ -261,5 +261,19 @@ class Bibliotheque:
             else:
                 break # Sort de la boucle interne pour revenir au menu principal
 
-biblio1 = Bibliotheque("biblio1")
-biblio1.ajouter_doc()
+
+
+
+    def sauvegarder_livres(self, chemin_fichier):
+        with open(chemin_fichier, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Titre", "Auteur", "ISBN", "Quantité disponible", "Quantité totale"])
+
+            for livre in self.liste_documents:
+                writer.writerow([
+                    livre.titre,
+                    livre.auteur,
+                    livre.isbn,
+                    livre.qte_dispo,
+                    livre.quantite
+                ])
