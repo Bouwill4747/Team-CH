@@ -111,7 +111,7 @@ class Bibliotheque:
         print("============================================================")
 
         for emprunt in self.liste_emprunts:
-            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}. ID d'emprunt : {emprunt.id_emprunt}")
+            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}. ID d'emprunt : {emprunt.id_emprunt}\n")
 
     def ajouter_ad(self):
         while True: # boucle interne pour permettre d'ajouter un autre adhérent à la fin de la méthode
@@ -322,3 +322,25 @@ class Bibliotheque:
                     break # Laisse la boucle while continuer = permet une nouvelle suppression
                 if choix == "N":
                     return # Sort de la boucle interne pour revenir au menu principal
+                if choix.strip().upper() == "N":
+                    return # Sort de la boucle interne pour revenir au menu principal
+            choix = input("Voulez-vous supprimer un autre document ? (O/N) : ")
+            if choix.strip().upper() == "O":
+                continue # Laisse la boucle while continuer = permet une nouvelle suppression
+            else:
+                break # Sort de la boucle interne pour revenir au menu principal
+
+
+    def sauvegarder_livres(self, chemin_fichier):
+        with open(chemin_fichier, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Titre", "Auteur", "ISBN", "Quantité disponible", "Quantité totale"])
+
+            for livre in self.liste_documents:
+                writer.writerow([
+                    livre.titre,
+                    livre.auteur,
+                    livre.isbn,
+                    livre.qte_dispo,
+                    livre.quantite
+                ])

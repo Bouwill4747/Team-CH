@@ -3,14 +3,12 @@ from Classe_Adherent import Adherent
 from Classe_Emprunt import Emprunt
 from Classe_Document import *
 
-def sauvegarder_modification():
-    pass
-
 def retour_au_menu():
     input("\n👆 Appuyez sur Entrée pour retourner au menu...\n")
 
 def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
+    print("\n\n")
     print("=" * 60)
     print(f"🌟  BIENVENUE À {nom_biblio.upper()}  🌟")
     print("=" * 60)
@@ -64,6 +62,7 @@ if __name__ == "__main__":
 
         elif choix == 3:
             biblio1.afficher_liste_adherents()
+            retour_au_menu()
 
         elif choix == 4:
             biblio1.ajouter_doc()
@@ -81,13 +80,15 @@ if __name__ == "__main__":
             retour_au_menu()
 
         elif choix == 8:
-            Adherent.rendre_livre()
+            Adherent.rendre_livre(biblio1)
 
         elif choix == 9:
-            Bibliotheque.afficher_liste_emprunts()
+            biblio1.afficher_liste_emprunts()
+            retour_au_menu()
 
         elif choix == 10:
-            pass
+            Emprunt.prolonger_date_retour(biblio1)
 
         elif choix == 11:
-            sauvegarder_modification()
+            chemin = "livres1.csv"
+            Bibliotheque.sauvegarder_livres(biblio1, chemin)

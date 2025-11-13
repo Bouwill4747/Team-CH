@@ -68,20 +68,26 @@ class Adherent:
 
         # Demander ID adhérent
         while True:
-            while True:
-                try:
-                    id_adherent = int(input("Veuillez saisir l'ID de l'adhérent : "))
-                    if id_adherent <= 0:
-                        print("❌ L'ID doit être un nombre positif!")
-                        continue
-                    break
-                except ValueError:
-                    print("❌ Veuillez entrer un nombre valide pour l'ID!")
+
+            try:
+                id_adherent = int(input("Veuillez saisir l'ID de l'adhérent : "))
+                if id_adherent <= 0:
+                    print("❌ L'ID doit être un nombre positif!")
+                    continue
+
+                id_adherent = int(id_adherent)
+                if id_adherent <= 0:
+                    print("❌ L'ID doit être un nombre positif!")
+                    continue
+
+            except ValueError:
+                print("❌ Veuillez entrer un nombre valide pour l'ID!")
+                continue
 
             adherent_choisi = None
-            for x in bibliotheque.liste_adherents:
-                if x.id == id_adherent:
-                    adherent_choisi = x
+            for adherent in bibliotheque.liste_adherents:
+                if hasattr(adherent, 'id') and adherent.id == id_adherent: # hasattr = fonction Python qui vérifie si un objet possède un certain attribut
+                    adherent_choisi = adherent
                     break
 
             if adherent_choisi is not None:
@@ -96,6 +102,10 @@ class Adherent:
             if emprunt.adherent.id == adherent_choisi.id:
                 liste_emprunts_adherent.append(emprunt)
 
+        if not liste_emprunts_adherent:
+            print("❌ Cet adhérent n'a aucun emprunt en cours!")
+            return
+
         # Classer les emprunts avec un numéro devant
         dictionnaire_emprunts = {}
         numero = 1
@@ -103,21 +113,58 @@ class Adherent:
             dictionnaire_emprunts[numero] = emprunt
             numero += 1
 
+        if not dictionnaire_emprunts:
+            print("❌ Aucun emprunt valide trouvé pour cet adhérent!")
+            return
+
         # Afficher les emprunts de cet adhérent la (avec leur numéro à leur gauche)
         print("\nVoici la liste des emprunts :\n")
         for numero, emprunt in dictionnaire_emprunts.items():
             print(f"{numero} - {emprunt.livre.titre} | Emprunté le : {emprunt.date_emprunt}")
 
         # Le user tape un numéro pour choisir quel emprunt rendre
-        choix = int(input("\nEntrez le numéro de l'emprunt que vous voulez rendre : "))
-        while choix not in dictionnaire_emprunts:
-            choix = int(input("Numéro invalide. Essayez encore : "))
-        a_rendre = dictionnaire_emprunts[choix]
+        while True:
+            try:
+                choix_input = input("\nEntrez le numéro de l'emprunt que vous voulez rendre : ").strip()
+                if not choix_input:
+                    print("❌ Le numéro ne peut pas être vide!")
+                    continue
 
-        # L'emprunt est supprimé de la liste d'emprunt de la bibliothèque
-        for emprunt in bibliotheque.liste_emprunts:
-            if emprunt is a_rendre:
-                emprunt.livre.qte_dispo += 1
-                bibliotheque.liste_emprunts.remove(emprunt)
-                print("Emprunt complété avec succès!")
-                break
+                choix = int(choix_input)
+
+                if choix in dictionnaire_emprunts:
+                    a_rendre = dictionnaire_emprunts[choix]
+                    break
+                else:
+                    print(
+                        f"❌ Numéro invalide. Veuillez choisir entre {min(dictionnaire_emprunts.keys())} et {max(dictionnaire_emprunts.keys())}")   #dictionnaire_emprunts.keys() : retourne les clés du dictionnaire → [1, 2, 3]
+                                                                                                                                                    # min() : donne la plus petite clé → 1
+                                                                                                                                                    # max() : donne la plus grande clé → 3
+
+            except ValueError:
+                print("❌ Veuillez entrer un nombre valide!")
+            except KeyboardInterrupt:
+                print("\n❌ Opération annulée par l'utilisateur!")
+                return
+
+            # L'emprunt est supprimé de la liste d'emprunt de la bibliothèque
+        try:
+            for emprunt in bibliotheque.liste_emprunts[:]: # Copie de la liste pour éviter les problèmes lors de la suppression
+                if emprunt is a_rendre:
+                    # Vérifier et augmenter la quantité disponible
+                    if hasattr(emprunt.livre, 'qte_dispo'): # hasattr = Vérifie si l'objet livre possède bien un attribut appelé qte_dispo
+                        emprunt.livre.qte_dispo += 1
+                    else:
+                        print("⚠️  Impossible d'augmenter la quantité disponible - attribut manquant")
+
+                    bibliotheque.liste_emprunts.remove(emprunt)
+                    print("✅ Emprunt complété avec succès!")
+                    break
+            else:
+                print("❌ Erreur: Emprunt non trouvé dans la liste des emprunts!")
+
+        except Exception as e:
+            print(f"❌ Erreur lors du retour du livre: {e}")
+
+    # ajouter confirmer identité :
+    #   "L'adhérent choisi est Ferland Pinpin. Voulez-vous continuer ou choisir un autre adhérent?"
