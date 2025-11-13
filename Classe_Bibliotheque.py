@@ -168,7 +168,7 @@ class Bibliotheque:
                     trouve = adherent
             if trouve:
                 self.liste_adherents.remove(trouve)
-                print(f"✅ Adhérent #{trouve.id} : {trouve.nom_adherent} {trouve.prenom_adherent} retiré avec succès.")
+                print(f"✅ Adhérent #{trouve.id} : {trouve.nom} {trouve.prenom} retiré avec succès.")
             else:
                 print(f"Aucun adhérent trouvé avec l'identifiant {identifiant}. Réessayez.")
 
@@ -260,6 +260,3 @@ class Bibliotheque:
                 continue # Laisse la boucle while continuer = permet une nouvelle suppression
             else:
                 break # Sort de la boucle interne pour revenir au menu principal
-
-biblio1 = Bibliotheque("biblio1")
-biblio1.ajouter_doc()
