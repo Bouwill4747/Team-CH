@@ -49,10 +49,9 @@ class Bibliotheque:
                 for ligne in lignes:
                     ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
                     e = ligne.split(",")
-                    id = int(e[0])
-                    nom = e[1]
-                    prenom = e[2]
-                    nouvel_adherent = Adherent(nom, prenom, id)
+                    nom = e[0]
+                    prenom = e[1]
+                    nouvel_adherent = Adherent(nom, prenom, self)
                     self.liste_adherents.append(nouvel_adherent)
 
         except FileNotFoundError:
@@ -65,13 +64,12 @@ class Bibliotheque:
                 lignes = fichier.readlines()
                 del lignes[0]  # Supprime la première ligne (qui est les noms de colonne)
                 for ligne in lignes:
-
                     ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
                     e = ligne.split(",")
-                    id = int(e[0])
+                    id_adherent = int(e[0])
                     isbn = e[2]
                     for x in self.liste_adherents:
-                        if x.id == id:
+                        if x.id == id_adherent:
                             adherent = x
                     for x in self.liste_documents:
                         if x.isbn == isbn:
@@ -112,7 +110,7 @@ class Bibliotheque:
         print("============================================================")
 
         for emprunt in self.liste_emprunts:
-            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}. ID d'emprunt : {emprunt.id_emprunt}")
+            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}.")
 
     def ajouter_ad(self):
         while True: # boucle interne pour permettre d'ajouter un autre adhérent à la fin de la méthode
@@ -142,15 +140,9 @@ class Bibliotheque:
                 print(f"❌ L'adhérent {nom}, {prenom} existe déjà. Ajout annulé.")
 
             else:
-                # Classer les adhérents avec un numéro devant
-                dictionnaire_adherents = {}
-                id = 1
-                for adherent in self.liste_adherents:
-                    dictionnaire_adherents[id] = adherent
-                    id += 1
-                nouvel_adherent = Adherent(nom,prenom,id)
+                nouvel_adherent = Adherent(nom,prenom, self)
                 self.liste_adherents.append(nouvel_adherent)
-                print(f"Adhérent #{id} : {nom}, {prenom} ajouté avec succès.")
+                print(f"Adhérent #{nouvel_adherent.id} : {nom}, {prenom} ajouté avec succès.")
 
             # On demande à l’utilisateur s’il veut ajouter un 2e adhérent ou revenir au menu
             while True:
