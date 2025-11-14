@@ -76,7 +76,6 @@ if __name__ == "__main__":
 
         elif choix == 7:
             Adherent.emprunter_livre(biblio1)
-            print(biblio1.liste_emprunts[0])
             retour_au_menu()
 
         elif choix == 8:
