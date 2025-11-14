@@ -1,4 +1,5 @@
 from Classe_Emprunt import Emprunt
+from datetime import date
 
 class Adherent:
 
@@ -45,7 +46,7 @@ class Adherent:
         print("📚 Documents disponibles :")
         print("-" * 120)
         for x in bibliotheque.liste_documents:
-            if x.dispo and x.qte_dispo > 0:
+            if x.dispo:
                 print(x)
 
         # Entrer l'ISBN que vous voulez emprunter
@@ -55,7 +56,7 @@ class Adherent:
 
             choix_livre = None
             for x in bibliotheque.liste_documents:
-                if x.isbn == choix_isbn:
+                if x.isbn == choix_isbn and x.dispo:
                     choix_livre = x
                     break
 
@@ -69,6 +70,9 @@ class Adherent:
         emprunt = Emprunt(choix_adherent, bibliotheque, choix_livre)
         choix_livre.qte_dispo -= 1
         bibliotheque.liste_emprunts.append(emprunt)
+        print("✅ Livre emprunté avec succès :\n")
+        print(f"{choix_adherent.prenom} {choix_adherent.nom} a emprunté {choix_livre.titre} ({choix_livre.isbn}) le {emprunt.date_emprunt}.\n"
+              f"Quantité maintenant disponible : {choix_livre.qte_dispo}")
 
     @staticmethod
     def rendre_livre(bibliotheque):
@@ -78,11 +82,6 @@ class Adherent:
 
             try:
                 id_adherent = int(input("Veuillez saisir l'ID de l'adhérent : "))
-                if id_adherent <= 0:
-                    print("❌ L'ID doit être un nombre positif!")
-                    continue
-
-                id_adherent = int(id_adherent)
                 if id_adherent <= 0:
                     print("❌ L'ID doit être un nombre positif!")
                     continue
@@ -144,7 +143,7 @@ class Adherent:
                     break
                 else:
                     print(
-                        f"❌ Numéro invalide. Veuillez choisir entre {min(dictionnaire_emprunts.keys())} et {max(dictionnaire_emprunts.keys())}")   #dictionnaire_emprunts.keys() : retourne les clés du dictionnaire → [1, 2, 3]
+                        f"❌ Numéro invalide. Veuillez choisir un numéro entre {min(dictionnaire_emprunts.keys())} et {max(dictionnaire_emprunts.keys())}")   #dictionnaire_emprunts.keys() : retourne les clés du dictionnaire → [1, 2, 3]
                                                                                                                                                     # min() : donne la plus petite clé → 1
                                                                                                                                                     # max() : donne la plus grande clé → 3
 
@@ -165,7 +164,10 @@ class Adherent:
                         print("⚠️  Impossible d'augmenter la quantité disponible - attribut manquant")
 
                     bibliotheque.liste_emprunts.remove(emprunt)
-                    print("✅ Emprunt complété avec succès!")
+                    print("✅ Retour complété avec succès!")
+                    print(
+                        f"{adherent_choisi.prenom} {adherent_choisi.nom} a retourné {emprunt.livre.titre} ({emprunt.livre.isbn}) le {date.today()}.\n"
+                        f"Quantité maintenant disponible : {emprunt.livre.qte_dispo}")
                     break
             else:
                 print("❌ Erreur: Emprunt non trouvé dans la liste des emprunts!")
