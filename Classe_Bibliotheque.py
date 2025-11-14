@@ -1,3 +1,4 @@
+import csv
 import re # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
 from Classe_Document import *
 from Classe_Adherent import Adherent
@@ -48,10 +49,9 @@ class Bibliotheque:
                 for ligne in lignes:
                     ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
                     e = ligne.split(",")
-                    id = int(e[0])
-                    nom = e[1]
-                    prenom = e[2]
-                    nouvel_adherent = Adherent(nom, prenom, id)
+                    nom = e[0]
+                    prenom = e[1]
+                    nouvel_adherent = Adherent(nom, prenom, self)
                     self.liste_adherents.append(nouvel_adherent)
 
         except FileNotFoundError:
@@ -67,10 +67,10 @@ class Bibliotheque:
 
                     ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
                     e = ligne.split(",")
-                    id = int(e[0])
+                    id_adherent = int(e[0])
                     isbn = e[2]
                     for x in self.liste_adherents:
-                        if x.id == id:
+                        if x.id == id_adherent:
                             adherent = x
                     for x in self.liste_documents:
                         if x.isbn == isbn:
@@ -111,7 +111,7 @@ class Bibliotheque:
         print("============================================================")
 
         for emprunt in self.liste_emprunts:
-            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}. ID d'emprunt : {emprunt.id_emprunt}\n")
+            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}.\n")
 
     def ajouter_ad(self):
         while True: # boucle interne pour permettre d'ajouter un autre adhérent à la fin de la méthode
@@ -140,10 +140,10 @@ class Bibliotheque:
             if doublon :
                 print(f"❌ L'adhérent {nom}, {prenom} existe déjà. Ajout annulé.")
 
-            else:####################################################################################################### vérifier si l'id se met automatiquement
-                nouvel_adherent = Adherent(nom,prenom,self)
+            else:
+                nouvel_adherent = Adherent(nom,prenom, self)
                 self.liste_adherents.append(nouvel_adherent)
-                print(f"Adhérent #{id} : {nom}, {prenom} ajouté avec succès!")
+                print(f"Adhérent #{nouvel_adherent.id} : {nom}, {prenom} ajouté avec succès.")
 
             # On demande à l’utilisateur s’il veut ajouter un 2e adhérent ou revenir au menu
             while True:
@@ -322,11 +322,6 @@ class Bibliotheque:
                     break # Laisse la boucle while continuer = permet une nouvelle suppression
                 if choix == "N":
                     return # Sort de la boucle interne pour revenir au menu principal
-                if choix.strip().upper() == "N":
-                    return # Sort de la boucle interne pour revenir au menu principal
-            choix = input("Voulez-vous supprimer un autre document ? (O/N) : ")
-            if choix.strip().upper() == "O":
-                continue # Laisse la boucle while continuer = permet une nouvelle suppression
             else:
                 break # Sort de la boucle interne pour revenir au menu principal
 

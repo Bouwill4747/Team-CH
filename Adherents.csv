@@ -1,8 +1,8 @@
-id_adherent,nom,prenom
-001,Perlin,Pinpin
-002,Julie,Pinpin
-003,Mathieu,Pinpin
-004,Fernand,Pinpin
-005,Bros,Mario
-006,Allo,Pipo
-007,Bond,James
+nom,prenom
+Perlin,Pinpin
+Julie,Pinpin
+Mathieu,Pinpin
+Fernand,Pinpin
+Bros,Mario
+Allo,Pipo
+Bond,James
