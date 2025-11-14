@@ -92,7 +92,7 @@ class Bibliotheque:
             print(f"\n |{dash_line}|\n"
                   f" |  {doc.titre}  |\n"
                   f" |{dash_line}|\n"
-                  f"Titre : «{doc.titre}» | Auteur : {doc.auteur} | Quantité : {str(doc.quantite)} | ISBN : {doc.isbn}\n")
+                  f"Titre : «{doc.titre}» | Auteur : {doc.auteur} | Quantité disponible : {str(doc.qte_dispo)}/{str(doc.quantite)} | ISBN : {doc.isbn}\n")
 
 
 # Affiche la liste complète des adhérents
