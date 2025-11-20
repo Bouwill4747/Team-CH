@@ -1,16 +1,17 @@
 from Bibliotheque import Bibliotheque
 from Adherent import Adherent
 from Emprunt import Emprunt
+import Affichage
 import Sauvegarde
 
 def retour_au_menu():
     input("\n👆 Appuyez sur Entrée pour retourner au menu...\n")
 
-def afficher_menu(nom_biblio="Bibliotheque BDEB"):
+def afficher_menu(biblio):
 
     print("\n\n")
     print("=" * 60)
-    print(f"🌟  BIENVENUE À {nom_biblio.upper()}  🌟")
+    print(f"🌟  BIENVENUE À {biblio.nom_bibliotheque.upper()}  🌟")
     print("=" * 60)
     print("Choisissez une option :")
     print("-" * 40)
@@ -37,7 +38,8 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
     # Boucle de saisie utilisateur
     while True:
-        match choix.upper():
+        choix_utilisateur = input("👉 Choisissez une action (1-11 ou Q pour quitter) : ").strip()
+        match choix_utilisateur.upper():
             case 'Q':
                 return 'Q'
             case choix_str if choix_str.isdigit() and 1 <= int(choix_str) <= 11:
@@ -51,7 +53,7 @@ if __name__ == "__main__":
     biblio1 = Bibliotheque("Bibliotheque BDEB")
 
     while True:
-        choix = afficher_menu("Bibliotheque BDEB")
+        choix = afficher_menu(biblio1)
 
         match choix:
             case 'Q':
@@ -65,7 +67,7 @@ if __name__ == "__main__":
                 biblio1.enlever_ad()
 
             case 3:
-                biblio1.afficher_liste_adherents()
+                Affichage.afficher_liste_adherents(biblio1)
                 retour_au_menu()
 
             case 4:
@@ -75,7 +77,7 @@ if __name__ == "__main__":
                 biblio1.enlever_doc()
 
             case 6:
-                biblio1.afficher_liste_docs()
+                Affichage.afficher_liste_docs(biblio1)
                 retour_au_menu()
 
             case 7:
@@ -86,11 +88,11 @@ if __name__ == "__main__":
                 Adherent.rendre_livre(biblio1)
 
             case 9:
-                biblio1.afficher_liste_emprunts()
+                Affichage.afficher_liste_emprunts(biblio1)
                 retour_au_menu()
 
             case 10:
-                Emprunt.prolonger_date_retour(biblio1)
+                Emprunt.menu_prolonger_emprunt(biblio1)
 
             case 11 :
                 chemin = "livres1.csv"
