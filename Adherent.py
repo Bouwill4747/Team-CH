@@ -1,4 +1,4 @@
-from Classe_Emprunt import Emprunt
+from Emprunt import Emprunt
 from datetime import date
 
 class Adherent:

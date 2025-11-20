@@ -1,8 +1,8 @@
 import re # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
-from Classe_Document import *
-from Classe_Adherent import Adherent
-from Classe_Emprunt import Emprunt
-import affichage
+from Document import *
+from Adherent import Adherent
+from Emprunt import Emprunt
+import Affichage
 
 class Bibliotheque:
 

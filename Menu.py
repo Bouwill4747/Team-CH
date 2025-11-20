@@ -1,6 +1,6 @@
-from Classe_Bibliotheque import Bibliotheque
-from Classe_Adherent import Adherent
-from Classe_Emprunt import Emprunt
+from Bibliotheque import Bibliotheque
+from Adherent import Adherent
+from Emprunt import Emprunt
 import Sauvegarde
 
 def retour_au_menu():
