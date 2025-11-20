@@ -128,7 +128,7 @@ class Bibliotheque:
 
     def enlever_ad(self):
         while True: # boucle interne pour permettre de supprimer un autre adhérent à la fin de la méthode
-            affichage.afficher_liste_adherents(self) # Affiche la liste d'adhérents actuels
+            Affichage.afficher_liste_adherents(self) # Affiche la liste d'adhérents actuels
 
             # Saisie de l'utilisateur
             try:
@@ -259,7 +259,7 @@ class Bibliotheque:
 
     def enlever_doc(self):
         while True:
-            affichage.afficher_liste_docs(self)  # Affiche la liste actuelle des documents
+            Affichage.afficher_liste_docs(self)  # Affiche la liste actuelle des documents
 
             # Saisie du ISBN par l'utilisateur
             choix_document = input("Saisissez l'ISBN du document à supprimer : ").strip()
