@@ -3,6 +3,7 @@ import re # Pour accepter l'input d'accents et de tirets dans les noms d'adhére
 from Classe_Document import *
 from Classe_Adherent import Adherent
 from Classe_Emprunt import Emprunt
+import affichage
 
 class Bibliotheque:
 
@@ -11,7 +12,7 @@ class Bibliotheque:
         self.liste_emprunts = []
         self.liste_documents = []
         self.liste_adherents = []
-        self.importer_docs() # Importe automatiquement les documents quand la bibliothèque est créée
+        self.importer_documents() # Importe automatiquement les documents quand la bibliothèque est créée
         self.importer_adherents() # Importe automatiquement les adhérents quand la bibliothèque est créée
         self.importer_emprunts() # Importe automatiquement les emprunts quand la bibliothèque est créée
 
@@ -19,9 +20,9 @@ class Bibliotheque:
         return self.nom_bibliotheque
 
 # Importe et crée une liste de documents avec attributs : titre, isbn, quantite, auteur
-    def importer_docs(self):
+    def importer_documents(self):
         try:
-            with open("livres.csv", "r", encoding="utf-8") as fichier:
+            with open("livres.csv", "r", encoding="utf-8") as fichier: #Le fichier sera fermé automatiquement une fois que la boucle with ser ter
 
                 lignes = fichier.readlines()
                 del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
@@ -82,37 +83,6 @@ class Bibliotheque:
             print("Erreur : Le fichier n'existe pas.")
 
 
-    def afficher_liste_docs(self):
-        print("============================================================")
-        print("                  Liste des documents                       ")
-        print("============================================================")
-
-        for doc in self.liste_documents:
-            dash_line = '-' * (len(doc.titre) + 4)
-            print(f"\n |{dash_line}|\n"
-                  f" |  {doc.titre}  |\n"
-                  f" |{dash_line}|\n"
-                  f"Titre : «{doc.titre}» | Auteur : {doc.auteur} | Quantité disponible : {str(doc.qte_dispo)}/{str(doc.quantite)} | ISBN : {doc.isbn}\n")
-
-
-# Affiche la liste complète des adhérents
-    def afficher_liste_adherents(self):
-        print("============================================================")
-        print("                  Liste des adhérents                       ")
-        print("============================================================")
-
-        for adherent in self.liste_adherents:
-            print(f"Nom : {adherent.nom} | Prénom : {str(adherent.prenom)} | ID de l'adhérent : {adherent.id}\n")
-
-
-    def afficher_liste_emprunts(self):
-        print("============================================================")
-        print("                  Liste d'emprunts                          ")
-        print("============================================================")
-
-        for emprunt in self.liste_emprunts:
-            print(f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}.\n")
-
     def ajouter_ad(self):
         while True: # boucle interne pour permettre d'ajouter un autre adhérent à la fin de la méthode
 
@@ -159,7 +129,7 @@ class Bibliotheque:
 
     def enlever_ad(self):
         while True: # boucle interne pour permettre de supprimer un autre adhérent à la fin de la méthode
-            self.afficher_liste_adherents() # Affiche la liste d'adhérents actuels
+            affichage.afficher_liste_adherents(self) # Affiche la liste d'adhérents actuels
 
             # Saisie de l'utilisateur
             try:
@@ -228,15 +198,16 @@ class Bibliotheque:
                 break
 
             while True: # Boucle qui valide que l'ISBN ne contient que des chiffres
-                isbn = input("Saisissez l'ISBN du document : ")
+                isbn = input("Saisissez l'ISBN du document : ").strip()
                 try:
-                    isbn = int(isbn)
-                    if isbn <= 0:
-                        print("❌ ISBN invalide! Veuillez saisir uniquement des chiffres.")
+                    valeur = int(isbn)  # essaie de convertir en entier
+                    if valeur <= 0:
+                        print("❌ ISBN invalide! L'ISBN doit être un nombre positif.")
                         continue
-                    break
+                    break # Si l'isbn est valide, on sort de la boucle.
                 except ValueError:
                     print("❌ ISBN invalide! Veuillez saisir uniquement des chiffres.")
+                    continue
 
             while True: # Boucle qui valide que la quantité est un entier
                 quantite = input("Saisissez la quantité : ").strip()
@@ -289,7 +260,7 @@ class Bibliotheque:
 
     def enlever_doc(self):
         while True:
-            self.afficher_liste_docs()  # Affiche la liste actuelle des documents
+            affichage.afficher_liste_docs(self)  # Affiche la liste actuelle des documents
 
             # Saisie du ISBN par l'utilisateur
             choix_document = input("Saisissez l'ISBN du document à supprimer : ").strip()
@@ -322,8 +293,6 @@ class Bibliotheque:
                     break # Laisse la boucle while continuer = permet une nouvelle suppression
                 if choix == "N":
                     return # Sort de la boucle interne pour revenir au menu principal
-            else:
-                break # Sort de la boucle interne pour revenir au menu principal
 
 
     def sauvegarder_livres(self, chemin_fichier):
