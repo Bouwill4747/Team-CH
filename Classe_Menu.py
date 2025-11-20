@@ -1,7 +1,7 @@
 from Classe_Bibliotheque import Bibliotheque
 from Classe_Adherent import Adherent
 from Classe_Emprunt import Emprunt
-from Classe_Document import *
+import Sauvegarde
 
 def retour_au_menu():
     input("\n👆 Appuyez sur Entrée pour retourner au menu...\n")
@@ -92,9 +92,13 @@ if __name__ == "__main__":
             case 10:
                 Emprunt.prolonger_date_retour(biblio1)
 
-            case 11:
+            case 11 :
                 chemin = "livres1.csv"
-                Bibliotheque.sauvegarder_livres(biblio1, chemin)
+                Sauvegarde.sauvegarder_livres(biblio1, chemin)
+                chemin = "adherents1.csv"
+                Sauvegarde.sauvegarder_adherents(biblio1, chemin)
+                chemin = "emprunts1.csv"
+                Sauvegarde.sauvegarder_emprunts(biblio1, chemin)
 
             case _:
                 print("❌ Option non reconnue !")
