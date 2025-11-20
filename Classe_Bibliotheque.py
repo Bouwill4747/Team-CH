@@ -1,4 +1,3 @@
-import csv
 import re # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
 from Classe_Document import *
 from Classe_Adherent import Adherent
@@ -325,17 +324,3 @@ class Bibliotheque:
             else:
                 break # Sort de la boucle interne pour revenir au menu principal
 
-
-    def sauvegarder_livres(self, chemin_fichier):
-        with open(chemin_fichier, "w", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow(["Titre", "Auteur", "ISBN", "Quantité disponible", "Quantité totale"])
-
-            for livre in self.liste_documents:
-                writer.writerow([
-                    livre.titre,
-                    livre.auteur,
-                    livre.isbn,
-                    livre.qte_dispo,
-                    livre.quantite
-                ])
