@@ -1,4 +1,3 @@
-import csv
 import re # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
 from Classe_Document import *
 from Classe_Adherent import Adherent
@@ -293,3 +292,6 @@ class Bibliotheque:
                     break # Laisse la boucle while continuer = permet une nouvelle suppression
                 if choix == "N":
                     return # Sort de la boucle interne pour revenir au menu principal
+            else:
+                break # Sort de la boucle interne pour revenir au menu principal
+
