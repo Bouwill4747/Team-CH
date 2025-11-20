@@ -72,7 +72,7 @@ class Adherent:
         bibliotheque.liste_emprunts.append(emprunt)
         print("✅ Livre emprunté avec succès :\n")
         print(f"{choix_adherent.prenom} {choix_adherent.nom} a emprunté {choix_livre.titre} ({choix_livre.isbn}) le {emprunt.date_emprunt}.\n"
-              f"Quantité maintenant disponible : {choix_livre.qte_dispo}/{choix_livre.qquantite}\n")
+              f"Quantité maintenant disponible : {choix_livre.qte_dispo}")
 
     @staticmethod
     def rendre_livre(bibliotheque):
@@ -157,11 +157,17 @@ class Adherent:
         try:
             for emprunt in bibliotheque.liste_emprunts[:]: # Copie de la liste pour éviter les problèmes lors de la suppression
                 if emprunt is a_rendre:
+                    # Vérifier et augmenter la quantité disponible
+                    if hasattr(emprunt.livre, 'qte_dispo'): # hasattr = Vérifie si l'objet livre possède bien un attribut appelé qte_dispo
+                        emprunt.livre.qte_dispo += 1
+                    else:
+                        print("⚠️  Impossible d'augmenter la quantité disponible - attribut manquant")                                          #Checker ca
+
                     bibliotheque.liste_emprunts.remove(emprunt)
                     print("✅ Retour complété avec succès!")
                     print(
                         f"{adherent_choisi.prenom} {adherent_choisi.nom} a retourné {emprunt.livre.titre} ({emprunt.livre.isbn}) le {date.today()}.\n"
-                        f"Quantité maintenant disponible : {emprunt.livre.qte_dispo}/{emprunt.quantite}\n")
+                        f"Quantité maintenant disponible : {emprunt.livre.qte_dispo}")
                     break
             else:
                 print("❌ Erreur: Emprunt non trouvé dans la liste des emprunts!")
