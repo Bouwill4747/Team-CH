@@ -37,12 +37,13 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
     # Boucle de saisie utilisateur
     while True:
-        choix = input("👉 Choisissez une action (1-11 ou Q pour quitter) : ").strip()
-        if choix.upper() == 'Q':
-            return 'Q'
-        elif choix.isdigit() and 1 <= int(choix) <= 11:
-            return int(choix)
-        print("❌ Choix erroné ! Veuillez entrer un nombre entre 1 et 11 ou Q.")
+        match choix.upper():
+            case 'Q':
+                return 'Q'
+            case choix_str if choix_str.isdigit() and 1 <= int(choix_str) <= 11:
+                return int(choix_str)
+            case _:
+                print("❌ Choix erroné ! Veuillez entrer un nombre entre 1 et 11 ou Q.")
 
 # --- Main :) ---
 if __name__ == "__main__":
@@ -51,47 +52,53 @@ if __name__ == "__main__":
 
     while True:
         choix = afficher_menu("Bibliotheque BDEB")
-        if choix == 'Q':
-            print("\nMerci d'avoir utilisé la bibliothèque ! À bientôt 👋")
-            break
-        elif choix == 1:
-            biblio1.ajouter_ad()
 
-        elif choix == 2:
-            biblio1.enlever_ad()
+        match choix:
+            case 'Q':
+                print("\nMerci d'avoir utilisé la bibliothèque ! À bientôt 👋")
+                break
 
-        elif choix == 3:
-            biblio1.afficher_liste_adherents()
-            retour_au_menu()
+            case 1:
+                biblio1.ajouter_ad()
 
-        elif choix == 4:
-            biblio1.ajouter_doc()
+            case 2:
+                biblio1.enlever_ad()
 
-        elif choix == 5:
-            biblio1.enlever_doc()
+            case 3:
+                biblio1.afficher_liste_adherents()
+                retour_au_menu()
 
-        elif choix == 6:
-            biblio1.afficher_liste_docs()
-            retour_au_menu()
+            case 4:
+                biblio1.ajouter_doc()
 
-        elif choix == 7:
-            Adherent.emprunter_livre(biblio1)
-            retour_au_menu()
+            case 5:
+                biblio1.enlever_doc()
 
-        elif choix == 8:
-            Adherent.rendre_livre(biblio1)
+            case 6:
+                biblio1.afficher_liste_docs()
+                retour_au_menu()
 
-        elif choix == 9:
-            biblio1.afficher_liste_emprunts()
-            retour_au_menu()
+            case 7:
+                Adherent.emprunter_livre(biblio1)
+                retour_au_menu()
 
-        elif choix == 10:
-            Emprunt.prolonger_date_retour(biblio1)
+            case 8:
+                Adherent.rendre_livre(biblio1)
 
-        elif choix == 11:
-            chemin = "livres1.csv"
-            Sauvegarde.sauvegarder_livres(biblio1, chemin)
-            chemin = "adherents1.csv"
-            Sauvegarde.sauvegarder_adherents(biblio1, chemin)
-            chemin = "emprunts1.csv"
-            Sauvegarde.sauvegarder_emprunts(biblio1, chemin)
+            case 9:
+                biblio1.afficher_liste_emprunts()
+                retour_au_menu()
+
+            case 10:
+                Emprunt.prolonger_date_retour(biblio1)
+
+            case 11 :
+                chemin = "livres1.csv"
+                Sauvegarde.sauvegarder_livres(biblio1, chemin)
+                chemin = "adherents1.csv"
+                Sauvegarde.sauvegarder_adherents(biblio1, chemin)
+                chemin = "emprunts1.csv"
+                Sauvegarde.sauvegarder_emprunts(biblio1, chemin)
+
+            case _:
+                print("❌ Option non reconnue !")
