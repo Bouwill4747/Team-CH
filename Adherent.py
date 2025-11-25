@@ -67,8 +67,7 @@ class Adherent:
                 print("❌ ISBN non trouvé ou livre non disponible!")
                 print("Veuillez réessayer...\n")
 
-        emprunt = Emprunt(choix_adherent, bibliotheque, choix_livre)
-        choix_livre.qte_dispo -= 1
+        emprunt = Emprunt(choix_adherent, choix_livre)
         bibliotheque.liste_emprunts.append(emprunt)
         print("✅ Livre emprunté avec succès :\n")
         print(f"{choix_adherent.prenom} {choix_adherent.nom} a emprunté {choix_livre.titre} ({choix_livre.isbn}) le {emprunt.date_emprunt}.\n"

@@ -18,7 +18,7 @@ def afficher_liste_adherents(biblio):
     print("="*60)
 
     for adherent in biblio.liste_adherents:
-        print(f"Nom : {adherent.nom} | Prénom : {str(adherent.prenom)} | ID de l'adhérent : {adherent.id}\n")
+        print(f"Nom : {adherent.nom} | Prénom : {str(adherent.prenom)} | ID : {adherent.id}\n")
 
 
 def afficher_liste_emprunts(biblio):

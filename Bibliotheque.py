@@ -1,7 +1,6 @@
 import re # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
 from Document import *
 from Adherent import Adherent
-from Emprunt import Emprunt
 import Affichage
 
 class Bibliotheque:
@@ -10,9 +9,6 @@ class Bibliotheque:
         self.liste_emprunts = []
         self.liste_documents = []
         self.liste_adherents = []
-        self.importer_documents() # Importe automatiquement les documents quand la bibliothèque est créée
-        self.importer_adherents() # Importe automatiquement les adhérents quand la bibliothèque est créée
-        self.importer_emprunts() # Importe automatiquement les emprunts quand la bibliothèque est créée
 
     def __str__(self):
         return self.nom_bibliotheque
@@ -73,6 +69,7 @@ class Bibliotheque:
 
             # Saisie de l'utilisateur
             while True:
+                #      PERMETTRE LES ESPACES? J'peux pas mettre "De Celles" :(
                 nom = input("Saisissez le nom de l'adhérent : ").strip()
                 if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\-]+$", nom): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
                     print("❌ Le nom ne peut contenir que des lettres et un tiret. Réessayez.")

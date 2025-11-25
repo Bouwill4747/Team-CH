@@ -1,8 +1,11 @@
-ID_Adherent,Titre_Livre,ISBN
-1,Animal Farm,100009
-2,Jane Eyre,100011
-3,The Catcher in the Rye,10000
-4,Wuthering Heights,100013
-5,Fahrenheit 451,100005
-6,The Hobbit,100008
-7,1984,10002
+Adhérent,ID d'adhérent,Titre du livre,ISBN,Date d'emprunt,Date de retour
+Jean Tremblay,1,To Kill a Mockingbird,100001,2025-11-24,2025-12-08
+Marie Gagnon,2,1984,100002,2025-11-24,2025-12-08
+Luc Roy,3,Brave New World,100003,2025-11-24,2025-12-08
+Sophie Bouchard,4,The Great Gatsby,100004,2025-11-24,2025-12-08
+Marc Gauthier,5,Fahrenheit 451,100005,2025-11-24,2025-12-08
+Julie Morin,6,Moby-Dick,100006,2025-11-24,2025-12-08
+Patrick Lavoie,7,Pride and Prejudice,100007,2025-11-24,2025-12-08
+Isabelle Fortin,8,The Hobbit,100008,2025-11-24,2025-12-08
+Denis Gagne,9,Animal Farm,100009,2025-11-24,2025-12-08
+Caroline Cote,10,The Lord of the Rings,100010,2025-11-24,2025-12-08

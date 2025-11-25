@@ -1,16 +1,17 @@
-titre,isbn,quantite,auteur,qte_dispo
-The Catcher in the Rye,100000,5,J.D. Salinger,5
-To Kill a Mockingbird,100001,8,Harper Lee,8
-1984,100002,10,George Orwell,10
-Brave New World,100003,6,Aldous Huxley,6
-The Great Gatsby,100004,4,F. Scott Fitzgerald,4
-Fahrenheit 451,100005,7,Ray Bradbury,7
-Moby-Dick,100006,3,Herman Melville,3
-Pride and Prejudice,100007,9,Jane Austen,9
-The Hobbit,100008,12,J.R.R. Tolkien,12
-Animal Farm,100009,2,George Orwell,2
-The Lord of the Rings,100010,5,J.R.R. Tolkien,5
-Jane Eyre,100011,1,Charlotte Brontë,1
-Crime and Punishment,100012,1,Fyodor Dostoevsky,1
-Wuthering Heights,100013,1,Emily Brontë,1
-The Picture of Dorian Gray,100014,6,Oscar Wilde,6
+Titre,Auteur,ISBN,Quantité disponible,Quantité totale
+The Catcher in the Rye,J.D. Salinger,100000,5,5
+To Kill a Mockingbird,Harper Lee,100001,7,8
+1984,George Orwell,100002,9,10
+Brave New World,Aldous Huxley,100003,5,6
+The Great Gatsby,F. Scott Fitzgerald,100004,3,4
+Fahrenheit 451,Ray Bradbury,100005,6,7
+Moby-Dick,Herman Melville,100006,2,3
+Pride and Prejudice,Jane Austen,100007,8,9
+The Hobbit,J.R.R. Tolkien,100008,11,12
+Animal Farm,George Orwell,100009,1,2
+The Lord of the Rings,J.R.R. Tolkien,100010,4,5
+Jane Eyre,Charlotte Brontë,100011,1,1
+Crime and Punishment,Fyodor Dostoevsky,100012,1,1
+Wuthering Heights,Emily Brontë,100013,1,1
+The Picture of Dorian Gray,Oscar Wilde,100014,6,6
+titre,auteur,100123,54,54

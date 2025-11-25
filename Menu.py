@@ -50,10 +50,13 @@ def afficher_menu(biblio):
 # --- Main :) ---
 if __name__ == "__main__":
 
-    biblio1 = Bibliotheque("Bibliotheque BDEB")
+    biblio = Bibliotheque("Bibliotheque BDEB")
+    Sauvegarde.importer_documents(biblio)  # Importe automatiquement les documents quand la bibliothèque est créée
+    Sauvegarde.importer_adherents(biblio)  # Importe automatiquement les adhérents quand la bibliothèque est créée
+    Sauvegarde.importer_emprunts(biblio)  # Importe automatiquement les emprunts quand la bibliothèque est cré
 
     while True:
-        choix = afficher_menu(biblio1)
+        choix = afficher_menu(biblio)
 
         match choix:
             case 'Q':
@@ -61,46 +64,43 @@ if __name__ == "__main__":
                 break
 
             case 1:
-                biblio1.ajouter_ad()
+                biblio.ajouter_ad()
 
             case 2:
-                biblio1.enlever_ad()
+                biblio.enlever_ad()
 
             case 3:
-                Affichage.afficher_liste_adherents(biblio1)
+                Affichage.afficher_liste_adherents(biblio)
                 retour_au_menu()
 
             case 4:
-                biblio1.ajouter_doc()
+                biblio.ajouter_doc()
 
             case 5:
-                biblio1.enlever_doc()
+                biblio.enlever_doc()
 
             case 6:
-                Affichage.afficher_liste_docs(biblio1)
+                Affichage.afficher_liste_docs(biblio)
                 retour_au_menu()
 
             case 7:
-                Adherent.emprunter_livre(biblio1)
+                Adherent.emprunter_livre(biblio)
                 retour_au_menu()
 
             case 8:
-                Adherent.rendre_livre(biblio1)
+                Adherent.rendre_livre(biblio)
 
             case 9:
-                Affichage.afficher_liste_emprunts(biblio1)
+                Affichage.afficher_liste_emprunts(biblio)
                 retour_au_menu()
 
             case 10:
-                Emprunt.menu_prolonger_emprunt(biblio1)
+                Emprunt.prolonger_date_retour(biblio.liste_emprunts[0])
 
             case 11 :
-                chemin = "livres1.csv"
-                Sauvegarde.sauvegarder_livres(biblio1, chemin)
-                chemin = "adherents1.csv"
-                Sauvegarde.sauvegarder_adherents(biblio1, chemin)
-                chemin = "emprunts1.csv"
-                Sauvegarde.sauvegarder_emprunts(biblio1, chemin)
+                Sauvegarde.sauvegarder_livres(biblio)
+                Sauvegarde.sauvegarder_adherents(biblio)
+                Sauvegarde.sauvegarder_emprunts(biblio)
 
             case _:
                 print("❌ Option non reconnue !")
