@@ -17,7 +17,6 @@ class Emprunt:
          self.date_retour += timedelta(14)
 
     @staticmethod
-
     def menu_prolonger_emprunt(bibliotheque):
 
         while True:
@@ -69,7 +68,7 @@ class Emprunt:
                     print("❌ Veuillez entrer un nombre valide!")
 
             # --- Prolongation ---
-            emprunt_choisi.prolonger_date_retour()
+            emprunt_choisi.date_retour += timedelta(14)
 
             print(f"\n✅ Prolongation réussie !")
             print(f"Nouvelle date de retour pour « {emprunt_choisi.livre.titre} » : {emprunt_choisi.date_retour}")
@@ -78,6 +77,3 @@ class Emprunt:
             again = input("\nVoulez-vous prolonger un autre emprunt ? (O/N) : ").strip().upper()
             if again != "O":
                 break
-
-    # def prolonger_date_retour(self, jours_extra: int):
-    #     self.date_retour += timedelta(jours_extra)

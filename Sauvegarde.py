@@ -6,73 +6,48 @@ from Emprunt import Emprunt
 # Importe et crée une liste de documents avec attributs : titre, isbn, quantite, auteur
 def importer_documents(biblio):
     try:
-        # Le fichier sera fermé automatiquement une fois que la boucle with terminera
         with open("livres.csv", "r", encoding="utf-8") as fichier:
-            lignes = fichier.readlines()
-            del lignes[0]  # Supprime la première ligne (qui est les noms de colonne)
+            lignes = fichier.readlines()[1:]  # Supprime la première ligne (en-tête)
             for ligne in lignes:
-                ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
-                e = ligne.split(",")
-                titre = e[0]
-                auteur = e[1]
-                isbn = e[2]
-                quantite = int(e[4])  # Quantité totale (dernière colonne)
-                # Note: e[3] contient quantité disponible si besoin
-
-                nouveau_doc = Livre(titre, isbn, quantite, auteur)
-                biblio.liste_documents.append(nouveau_doc)
-
+                e = ligne.strip().split(",")
+                titre, isbn, quantite, auteur = e[0], e[2], int(e[4]), e[1]
+                biblio.liste_documents.append(Livre(titre, isbn, quantite, auteur))
     except FileNotFoundError:
-        print("Erreur : le fichier n'existe pas.")
+        print("Erreur : Le fichier livres.csv n'existe pas.")
 
 # Importe et crée une liste d'adhérents avec les attributs : nom, prenom, id_adherent
 def importer_adherents(biblio):
     try:
         with open("adherents_import.csv", "r", encoding="utf-8") as fichier:
-            lignes = fichier.readlines()
-            del lignes[0]  # Supprime la première ligne (qui est les noms de colonne)
-            for ligne in lignes:
-                ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
-                e = ligne.split(",")
-                prenom = e[0]
-                nom = e[1]
-
-                nouvel_adherent = Adherent(nom, prenom, biblio)
-                biblio.liste_adherents.append(nouvel_adherent)
-
+            next(fichier)  # Saute la ligne d'en-tête "prenom,nom"
+            for ligne in fichier:
+                prenom, nom = ligne.strip().split(",")
+                biblio.liste_adherents.append(Adherent(nom, prenom, biblio))
     except FileNotFoundError:
-        print("Erreur : Le fichier n'existe pas.")
+        print("Erreur : Le fichier adherents_imports.csv n'existe pas.")
 
 # Importe et crée une liste d'emprunts avec les attributs : (à voir)
 def importer_emprunts(biblio):
     try:
         with open("emprunts_import.csv", "r", encoding="utf-8") as fichier:
-            lignes = fichier.readlines()
-            del lignes[0]  # Supprime la première ligne (qui est les noms de colonne)
+            lignes = fichier.readlines()[1:]
             for ligne in lignes:
-                ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
-                e = ligne.split(",")
-                id_adherent = int(e[0])  # ID d'adhérent
-                isbn = e[1]  # ISBN
+                e = ligne.strip().split(",")
+                id_adherent, isbn = int(e[0]), e[1]
 
-                # Trouver l'adhérent correspondant
-                adherent = None
-                for x in biblio.liste_adherents:
-                    if x.id == id_adherent:
-                        adherent = x
-                        break
+                try:
+                    adherent = next(a for a in biblio.liste_adherents if a.id == id_adherent)
+                except StopIteration:
+                    print(f"❌ Aucun adhérent avec l'ID {id_adherent} trouvé. Emprunt ignoré.")
+                    continue
 
-                # Trouver le livre correspondant
-                livre = None
-                for x in biblio.liste_documents:
-                    if x.isbn == isbn:
-                        livre = x
-                        break
+                try:
+                    livre = next(l for l in biblio.liste_documents if l.isbn == isbn)
+                except StopIteration:
+                    print(f"❌ Aucun document avec l'ISBN {isbn} trouvé. Emprunt ignoré.")
+                    continue
 
-                # Créer l'emprunt seulement si l'adhérent et le livre existent
-                if adherent and livre:
-                    nouvel_emprunt = Emprunt(adherent, livre)
-                    biblio.liste_emprunts.append(nouvel_emprunt)
+                biblio.liste_emprunts.append(Emprunt(adherent, livre))
 
     except FileNotFoundError:
         print("Erreur : Le fichier n'existe pas.")
