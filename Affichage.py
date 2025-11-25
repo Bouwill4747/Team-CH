@@ -28,4 +28,4 @@ def afficher_liste_emprunts(biblio):
 
     for emprunt in biblio.liste_emprunts:
         print(
-            f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt}.\n")
+            f"{emprunt.adherent.prenom} {emprunt.adherent.nom} a emprunté «{emprunt.livre.titre}» ({emprunt.livre.isbn}) le {emprunt.date_emprunt} et dois le retourner pour le {emprunt.date_retour}.\n")
