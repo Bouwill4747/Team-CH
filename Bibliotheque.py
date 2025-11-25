@@ -1,7 +1,6 @@
 import re # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
 from Document import *
 from Adherent import Adherent
-from Emprunt import Emprunt
 import Affichage
 
 class Bibliotheque:
@@ -11,82 +10,16 @@ class Bibliotheque:
         self.liste_emprunts = []
         self.liste_documents = []
         self.liste_adherents = []
-        self.importer_documents() # Importe automatiquement les documents quand la bibliothèque est créée
-        self.importer_adherents() # Importe automatiquement les adhérents quand la bibliothèque est créée
-        self.importer_emprunts() # Importe automatiquement les emprunts quand la bibliothèque est créée
 
     def __str__(self):
         return self.nom_bibliotheque
-
-# Importe et crée une liste de documents avec attributs : titre, isbn, quantite, auteur
-    def importer_documents(self):
-        try:
-            with open("livres.csv", "r", encoding="utf-8") as fichier: #Le fichier sera fermé automatiquement une fois que la boucle with ser ter
-
-                lignes = fichier.readlines()
-                del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
-
-                for ligne in lignes:
-
-                    ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
-                    e = ligne.split(",")
-                    titre = e[0]
-                    isbn = e[1]
-                    quantite = int(e[2])
-                    auteur = e[3]
-                    nouveau_doc = Livre(titre, isbn, quantite, auteur)
-                    self.liste_documents.append(nouveau_doc)
-
-        except FileNotFoundError:
-            print("Erreur : Le fichier n'existe pas.")
-
-# Importe et crée une liste d'adhérents avec les attributs : nom, prenom, id_adherent
-    def importer_adherents(self):
-        try:
-            with open("adherents.csv", "r", encoding="utf-8") as fichier:
-                lignes = fichier.readlines()
-                del lignes[0] # Supprime la première ligne (qui est les noms de colonne)
-                for ligne in lignes:
-                    ligne = ligne.strip() # Supprime "\n" à la fin de chaque ligne
-                    e = ligne.split(",")
-                    nom = e[0]
-                    prenom = e[1]
-                    nouvel_adherent = Adherent(nom, prenom, self)
-                    self.liste_adherents.append(nouvel_adherent)
-
-        except FileNotFoundError:
-            print("Erreur : Le fichier n'existe pas.")
-
-# Importe et crée une liste d'emprunts avec les attributs : (à voir)
-    def importer_emprunts(self):
-        try:
-            with open("emprunts.csv", "r", encoding="utf-8") as fichier:
-                lignes = fichier.readlines()
-                del lignes[0]  # Supprime la première ligne (qui est les noms de colonne)
-                for ligne in lignes:
-
-                    ligne = ligne.strip()  # Supprime "\n" à la fin de chaque ligne
-                    e = ligne.split(",")
-                    id_adherent = int(e[0])
-                    isbn = e[2]
-                    for x in self.liste_adherents:
-                        if x.id == id_adherent:
-                            adherent = x
-                    for x in self.liste_documents:
-                        if x.isbn == isbn:
-                            livre = x
-                    nouvel_emprunt = Emprunt(adherent, self, livre)
-                    self.liste_emprunts.append(nouvel_emprunt)
-
-        except FileNotFoundError:
-            print("Erreur : Le fichier n'existe pas.")
-
 
     def ajouter_ad(self):
         while True: # boucle interne pour permettre d'ajouter un autre adhérent à la fin de la méthode
 
             # Saisie de l'utilisateur
             while True:
+                #      PERMETTRE LES ESPACES? J'peux pas mettre "De Celles" :(
                 nom = input("Saisissez le nom de l'adhérent : ").strip()
                 if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\-]+$", nom): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
                     print("❌ Le nom ne peut contenir que des lettres et éventuellement un tiret. Réessayez.")
@@ -128,7 +61,7 @@ class Bibliotheque:
 
     def enlever_ad(self):
         while True: # boucle interne pour permettre de supprimer un autre adhérent à la fin de la méthode
-            affichage.afficher_liste_adherents(self) # Affiche la liste d'adhérents actuels
+            Affichage.afficher_liste_adherents(self) # Affiche la liste d'adhérents actuels
 
             # Saisie de l'utilisateur
             try:
@@ -244,7 +177,7 @@ class Bibliotheque:
             else: # Si aucun doublon, on crée le nouveau document + on l'ajoute à la liste de docs
                 nouveau_document = Livre(titre,isbn,quantite,auteur)
                 self.liste_documents.append(nouveau_document)
-                print(f"{quantite} exemplaires du document «{titre}» écrit par {auteur} ajouté avec succès.")
+                print(f"{quantite} exemplaires du document «{titre}» écrit par {auteur} ajoutés avec succès.")
 
             # On demande à l’utilisateur s’il veut ajouter un 2e document ou revenir au menu
             while True:
@@ -259,7 +192,7 @@ class Bibliotheque:
 
     def enlever_doc(self):
         while True:
-            affichage.afficher_liste_docs(self)  # Affiche la liste actuelle des documents
+            Affichage.afficher_liste_docs(self)  # Affiche la liste actuelle des documents
 
             # Saisie du ISBN par l'utilisateur
             choix_document = input("Saisissez l'ISBN du document à supprimer : ").strip()

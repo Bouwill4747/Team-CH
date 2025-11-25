@@ -1,16 +1,17 @@
 from Bibliotheque import Bibliotheque
 from Adherent import Adherent
 from Emprunt import Emprunt
+import Affichage
 import Sauvegarde
 
 def retour_au_menu():
     input("\n👆 Appuyez sur Entrée pour retourner au menu...\n")
 
-def afficher_menu(nom_biblio="Bibliotheque BDEB"):
+def afficher_menu(biblio):
 
     print("\n\n")
     print("=" * 60)
-    print(f"🌟  BIENVENUE À {nom_biblio.upper()}  🌟")
+    print(f"🌟  BIENVENUE À {biblio.nom_bibliotheque.upper()}  🌟")
     print("=" * 60)
     print("Choisissez une option :")
     print("-" * 40)
@@ -37,7 +38,8 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 
     # Boucle de saisie utilisateur
     while True:
-        match choix.upper():
+        choix_utilisateur = input("👉 Choisissez une action (1-11 ou Q pour quitter) : ").strip()
+        match choix_utilisateur.upper():
             case 'Q':
                 return 'Q'
             case choix_str if choix_str.isdigit() and 1 <= int(choix_str) <= 11:
@@ -48,10 +50,13 @@ def afficher_menu(nom_biblio="Bibliotheque BDEB"):
 # --- Main :) ---
 if __name__ == "__main__":
 
-    biblio1 = Bibliotheque("Bibliotheque BDEB")
+    biblio = Bibliotheque("Bibliotheque BDEB")
+    Sauvegarde.importer_documents(biblio)  # Importe automatiquement les documents quand la bibliothèque est créée
+    Sauvegarde.importer_adherents(biblio)  # Importe automatiquement les adhérents quand la bibliothèque est créée
+    Sauvegarde.importer_emprunts(biblio)  # Importe automatiquement les emprunts quand la bibliothèque est cré
 
     while True:
-        choix = afficher_menu("Bibliotheque BDEB")
+        choix = afficher_menu(biblio)
 
         match choix:
             case 'Q':
@@ -59,46 +64,43 @@ if __name__ == "__main__":
                 break
 
             case 1:
-                biblio1.ajouter_ad()
+                biblio.ajouter_ad()
 
             case 2:
-                biblio1.enlever_ad()
+                biblio.enlever_ad()
 
             case 3:
-                biblio1.afficher_liste_adherents()
+                Affichage.afficher_liste_adherents(biblio)
                 retour_au_menu()
 
             case 4:
-                biblio1.ajouter_doc()
+                biblio.ajouter_doc()
 
             case 5:
-                biblio1.enlever_doc()
+                biblio.enlever_doc()
 
             case 6:
-                biblio1.afficher_liste_docs()
+                Affichage.afficher_liste_docs(biblio)
                 retour_au_menu()
 
             case 7:
-                Adherent.emprunter_livre(biblio1)
+                Adherent.emprunter_livre(biblio)
                 retour_au_menu()
 
             case 8:
-                Adherent.rendre_livre(biblio1)
+                Adherent.rendre_livre(biblio)
 
             case 9:
-                biblio1.afficher_liste_emprunts()
+                Affichage.afficher_liste_emprunts(biblio)
                 retour_au_menu()
 
             case 10:
-                Emprunt.prolonger_date_retour(biblio1)
+                Emprunt.prolonger_date_retour(biblio.liste_emprunts[0])
 
             case 11 :
-                chemin = "livres1.csv"
-                Sauvegarde.sauvegarder_livres(biblio1, chemin)
-                chemin = "adherents1.csv"
-                Sauvegarde.sauvegarder_adherents(biblio1, chemin)
-                chemin = "emprunts1.csv"
-                Sauvegarde.sauvegarder_emprunts(biblio1, chemin)
+                Sauvegarde.sauvegarder_livres(biblio)
+                Sauvegarde.sauvegarder_adherents(biblio)
+                Sauvegarde.sauvegarder_emprunts(biblio)
 
             case _:
                 print("❌ Option non reconnue !")
