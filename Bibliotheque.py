@@ -19,18 +19,15 @@ class Bibliotheque:
 
             # Saisie de l'utilisateur
             while True:
-                print("-" * 60)
                 nom = input("Saisissez le nom de l'adhérent : ").strip()
                 if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\- ]+$", nom): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
                     print("❌ Le nom ne peut contenir que des lettres et des tirets!")
-                    print("Veuillez réessayer...\n")
                 else:
                     break
             while True:
                 prenom = input("Saisissez le prénom de l'adhérent : ").strip()
                 if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\- ]+$", prenom): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
                     print("❌ Le prénom ne peut contenir que des lettres et des tirets!")
-                    print("Veuillez réessayer...\n")
                 else:
                     break
 
@@ -43,7 +40,6 @@ class Bibliotheque:
             except StopIteration:
                 nouvel_adherent = Adherent(nom, prenom, self)
                 self.liste_adherents.append(nouvel_adherent)
-                print("-" * 60)
                 print(f"✅ Adhérent #{nouvel_adherent.id} : {nom} {prenom} ajouté avec succès.")
                 print("-" * 60)
 
@@ -58,33 +54,27 @@ class Bibliotheque:
 
 # Supprimer un adhérent
     def enlever_ad(self):
-        while True: # boucle interne pour permettre de supprimer un autre adhérent à la fin de la méthode
-            Affichage.afficher_liste_adherents(self) # Affiche la liste d'adhérents actuels
-
-            # Saisie de l'utilisateur
-            while True:
+        while True: #  boucle interne pour permettre de supprimer un autre adhérent à la fin de la méthode
+            while True: # boucle de saisie de l'utilisateur
                 try:
-                    print("-" * 60)
                     identifiant = int(input("Saisissez l'ID de l'adhérent à supprimer : "))
                 except ValueError:
                     print("❌ Aucun adhérent trouvé avec cet ID!")
-                    print("Veuillez réessayer...")
                     continue
 
                 # Recherche l'adhérent dans la liste
                 adherent = next((a for a in self.liste_adherents if a.id == identifiant),None)
                 if not adherent:
                     print("❌ Aucun adhérent trouvé avec cet ID!")
-                    print("Veuillez réessayer...")
                     continue
 
                 break
 
-            while True:
+            while True: # Boucle qui permet de confirmer la suppression
                 confirmation = input(
                     f"Confirmez-vous la suppression de {adherent.nom} {adherent.prenom} ? (O/N) : "
                 ).strip().upper()
-                # Vérifie si l'adhérent a des emprunts.
+
                 if confirmation == "O":
                     # Vérifie si l'adhérent a des emprunts.
                     for emprunt in self.liste_emprunts[:]: # Créer une copie de la liste pour éviter que des éléments de la liste soient sautés
@@ -92,7 +82,6 @@ class Bibliotheque:
                             self.liste_emprunts.remove(emprunt) # Supprime les emprunts de l'adhérent dans la liste originale
 
                     self.liste_adherents.remove(adherent)
-                    print("-" * 60)
                     print(f"✅ Adhérent #{adherent.id} supprimé avec succès.")
                     print("-" * 60)
                     break  # on sort du while de confirmation
@@ -105,24 +94,31 @@ class Bibliotheque:
                     print("❌ Réponse invalide! Veuillez inscrire O ou N.")
                     continue
 
+            while True:
+                choix = input("Voulez-vous supprimer un autre adhérent ? (O/N) : ").strip().upper()
+                if choix in ("O", "N"):
+                    break
+                print("❌ Réponse invalide! Veuillez inscrire O ou N.")
+
+            if choix == "N":
+                return
+
 # Ajoute un document
     def ajouter_doc(self):
         while True: # boucle interne pour permettre d'ajouter un autre document à la fin de la méthode
             # Saisie de l'utilisateur
             while True: # Boucle qui valide que le champ n'est pas vide
-                print("-" * 60)
                 titre = input("Saisissez le titre du document : ").strip()
                 if titre:
                     break
                 print("❌ Le titre ne peut pas être vide!")
-                print("Veuillez réessayer...")
 
             while True: # Boucle qui valide que le champ n'est pas vide
                 auteur = input("Saisissez l'auteur du document : ").strip()
-                if auteur:
+                if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\- ]+$", auteur): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
+                    print("❌ Le nom ne peut contenir que des lettres et des tirets!")
+                else:
                     break
-                print("❌ Le champ ne peut pas être vide!")
-                print("Veuillez réessayer...")
 
             while True: # Boucle qui valide que l'ISBN ne contient que des chiffres
                 isbn = input("Saisissez l'ISBN du document : ").strip()
@@ -141,7 +137,6 @@ class Bibliotheque:
                     if quantite > 0:
                         break
                     print("❌ La quantité doit être un nombre positif.")
-                    print("Veuillez réessayer...\n")
                 except ValueError:
                     print("❌ Entrez un nombre entier.")
 
@@ -177,32 +172,37 @@ class Bibliotheque:
 # Supprimer un document
     def enlever_doc(self):
         while True:
-            print("-" * 60)
-            Affichage.afficher_liste_docs(self)  # Affiche la liste actuelle des documents
             # Saisie du ISBN par l'utilisateur
             choix_isbn = input("Saisissez l'ISBN du document à supprimer : ").strip()
 
             # Recherche du document dans la liste
-            try:
-                document = next(doc for doc in self.liste_documents if doc.isbn == choix_isbn)
-            except StopIteration:
+            document = next((doc for doc in self.liste_documents if doc.isbn == choix_isbn), None)
+            if not document:
                 print(f"❌ Aucun document avec le numéro ISBN '{choix_isbn}' trouvé!")
-                print("Veuillez réessayer...")
                 continue
-                # Ici on a trouvé le document, donc on peut le supprimer
-            confirmation = input(f"Confirmez-vous la suppression de «{document.titre}» ? (O/N) : ").strip().upper()
-            if confirmation == "O":
-                # Vérifie s'il y a des emprunts pour ce livre
-                for emprunt in self.liste_emprunts[:]: # Créer une copie de la liste pour éviter que des éléments de la liste soient sautés
-                    if emprunt.livre.isbn == choix_isbn: # Parcourt la liste copiée
-                        self.liste_emprunts.remove(emprunt) # Supprime les emprunts de ce livre dans la liste originale
-                self.liste_documents.remove(document)
-                print("-" * 60)
-                print(f"✅ Titre : «{document.titre}» retiré avec succès.")
-                print("-" * 60)
-            else:
-                print("❌ Suppression annulée.")
 
+            # Boucle pour confirmer la suppression
+            while True:
+                confirmation = input(f"Confirmez-vous la suppression de «{document.titre}» ? (O/N) : ").strip().upper()
+                if confirmation == "O":
+                # Vérifie s'il y a des emprunts pour ce livre
+                    for emprunt in self.liste_emprunts[:]: # Créer une copie de la liste pour éviter que des éléments de la liste soient sautés
+                        if emprunt.livre.isbn == choix_isbn: # Parcourt la liste copiée
+                            self.liste_emprunts.remove(emprunt) # Supprime les emprunts de ce livre dans la liste originale
+                # Suppression du document
+                    self.liste_documents.remove(document)
+                    print(f"✅ Titre : «{document.titre}» retiré avec succès.")
+                    print("-" * 60)
+                    break
+
+                elif confirmation == "N":
+                    print("❌ Suppression annulée.")
+                    break
+
+                else:
+                    print("❌ Réponse invalide! Veuillez inscrire O ou N.")
+
+            # On demande à l’utilisateur s’il veut supprimer un 2e document ou revenir au menu
             while True:
                 choix = input("Voulez-vous supprimer un autre document ? (O/N) : ").strip().upper()
                 if choix in ("O", "N"):
