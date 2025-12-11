@@ -101,6 +101,7 @@ if __name__ == "__main__":
                 Sauvegarde.sauvegarder_livres(biblio)
                 Sauvegarde.sauvegarder_adherents(biblio)
                 Sauvegarde.sauvegarder_emprunts(biblio)
+                print("\nSauvegarde complétée.")
 
             case _:
                 print("❌ Option non reconnue !")

@@ -3,17 +3,20 @@ from datetime import date
 
 class Adherent:
 
-    def __init__(self, nom: str, prenom: str, bibliotheque):
+    def __init__(self, nom: str, prenom: str, bibliotheque, id: int = None):
         self.nom = nom
         self.prenom = prenom
-        # Récupérer tous les id déjà utilisés
-        used_ids = {e.id for e in bibliotheque.liste_adherents}
-        # Trouver le plus petit entier positif qui n'est pas dans used_ids
-        new_id = 1
-        while new_id in used_ids:
-            new_id += 1
-        # L’assigner
-        self.id = new_id
+        if id is not None:
+            self.id = id
+        else:
+            # Récupérer tous les id déjà
+            used_ids = {e.id for e in bibliotheque.liste_adherents}
+            # Trouver le plus petit entier positif qui n'est pas dans used_ids
+            new_id = 1
+            while new_id in used_ids:
+                new_id += 1
+            # L’assigner
+            self.id = new_id
 
     @staticmethod
     def emprunter_livre(bibliotheque):

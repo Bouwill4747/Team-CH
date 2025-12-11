@@ -18,22 +18,22 @@ def importer_documents(biblio):
 # Importe et crée une liste d'adhérents avec les attributs : nom, prenom, id_adherent
 def importer_adherents(biblio):
     try:
-        with open("adherents_import.csv", "r", encoding="utf-8") as fichier:
-            next(fichier)  # Saute la ligne d'en-tête "prenom,nom"
+        with open("adherents.csv", "r", encoding="utf-8") as fichier:
+            next(fichier)  # Saute la ligne d'en-tête "prenom,nom,id"
             for ligne in fichier:
-                prenom, nom = ligne.strip().split(",")
-                biblio.liste_adherents.append(Adherent(nom, prenom, biblio))
+                prenom, nom, id = ligne.strip().split(",")
+                biblio.liste_adherents.append(Adherent(nom, prenom, biblio, int(id)))
     except FileNotFoundError:
         print("Erreur : Le fichier adherents_imports.csv n'existe pas.")
 
 # Importe et crée une liste d'emprunts avec les attributs : (à voir)
 def importer_emprunts(biblio):
     try:
-        with open("emprunts_import.csv", "r", encoding="utf-8") as fichier:
+        with open("emprunts.csv", "r", encoding="utf-8") as fichier:
             lignes = fichier.readlines()[1:]
             for ligne in lignes:
                 e = ligne.strip().split(",")
-                id_adherent, isbn = int(e[0]), e[1]
+                id_adherent, isbn, date = int(e[1]), e[3], e[4]
 
                 try:
                     adherent = next(a for a in biblio.liste_adherents if a.id == id_adherent)
@@ -47,7 +47,7 @@ def importer_emprunts(biblio):
                     print(f"❌ Aucun document avec l'ISBN {isbn} trouvé. Emprunt ignoré.")
                     continue
 
-                biblio.liste_emprunts.append(Emprunt(adherent, livre))
+                biblio.liste_emprunts.append(Emprunt(adherent, livre, date))
 
     except FileNotFoundError:
         print("Erreur : Le fichier n'existe pas.")
