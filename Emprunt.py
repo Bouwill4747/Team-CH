@@ -11,7 +11,7 @@ class Emprunt:
         livre.qte_dispo -= 1
 
     def __str__(self):# *À finaliser comme on veut*
-        return f"{self.adherent.prenom} {self.adherent.nom} a emprunté {self.livre.titre} ({self.livre.isbn}) le {self.date_emprunt} et dois le retourner pour le {self.date_retour}"
+        return f"{self.adherent.prenom} {self.adherent.nom} a emprunté {self.livre.titre} ({self.livre.isbn}) le {self.date_emprunt} et doit le retourner pour le {self.date_retour}"
 
     def prolonger_date_retour(self):
          self.date_retour += timedelta(14)
