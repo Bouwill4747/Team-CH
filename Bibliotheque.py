@@ -140,11 +140,11 @@ class Bibliotheque:
                 except ValueError:
                     print("❌ Entrez un nombre entier.")
 
-            # Recherche si un document avec le même titre existe déjà dans la liste de documents
+            # Recherche si un document avec le même titre ou isbn existe déjà dans la liste de documents
             try:
                 print("-" * 60)
                 doc_existant = next(d for d in self.liste_documents if
-                                    d.titre.strip().lower() == titre.lower() and str(d.isbn) == str(isbn))
+                                    d.titre.strip().lower() == titre.lower() or str(d.isbn) == str(isbn))
                 # Document trouvé → augmenter quantité
                 choix = input(f"⚠️ Document existe. Augmenter quantité ? (O/N) : ").strip().upper()
                 if choix == "O":
