@@ -146,10 +146,10 @@ class Bibliotheque:
                 doc_existant = next(d for d in self.liste_documents if
                                     d.titre.strip().lower() == titre.lower() or str(d.isbn) == str(isbn))
                 # Document trouvé → augmenter quantité
-                choix = input(f"⚠️ Document existe. Augmenter quantité ? (O/N) : ").strip().upper()
+                choix = input(f"⚠️ Document «{doc_existant.titre}» existe déjà. Augmenter quantité ? (O/N) : ").strip().upper()
                 if choix == "O":
                     doc_existant.quantite += quantite
-                    print(f"✅ Quantité mise à jour : {doc_existant.quantite} exemplaires.")
+                    print(f"✅ Quantité mise à jour : «{doc_existant.titre}» a maintenant {doc_existant.quantite} exemplaires.")
                     print("-" * 60)
                 else:
                     print("❌ Ajout annulé.")
