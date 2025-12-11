@@ -105,33 +105,75 @@ class Bibliotheque:
 
 # Ajoute un document
     def ajouter_doc(self):
-        while True: # boucle interne pour permettre d'ajouter un autre document à la fin de la méthode
-            # Saisie de l'utilisateur
-            while True: # Boucle qui valide que le champ n'est pas vide
+        while True:
+            # Titre
+            while True:
                 titre = input("Saisissez le titre du document : ").strip()
                 if titre:
                     break
                 print("❌ Le titre ne peut pas être vide!")
 
-            while True: # Boucle qui valide que le champ n'est pas vide
+            # Auteur
+            while True:
                 auteur = input("Saisissez l'auteur du document : ").strip()
-                if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\- ]+$", auteur): # Pour accepter l'input d'accents et de tirets dans les noms d'adhérents
+                if not re.match(r"^[A-Za-zÀ-ÖØ-öø-ÿ\- ]+$", auteur):
                     print("❌ Le nom ne peut contenir que des lettres et des tirets!")
                 else:
                     break
 
-            while True: # Boucle qui valide que l'ISBN ne contient que des chiffres
+            # Vérifier si titre + auteur existe déjà
+            doc_existant = next(
+                (d for d in self.liste_documents
+                 if d.titre.strip().lower() == titre.lower() and d.auteur.strip().lower() == auteur.lower()),None)
+
+            if doc_existant:
+                print("-" * 60)
+                while True:
+                    choix = input(
+                        f"⚠️ Le document « {doc_existant.titre} » existe déjà. Augmenter quantité ? (O/N) : "
+                    ).strip().upper()
+                    if choix == "O":
+                        while True:
+                            try:
+                                quantite = int(input("Saisissez la quantité à ajouter : ").strip())
+                                if quantite > 0:
+                                    break
+                                print("❌ La quantité doit être un nombre positif.")
+                            except ValueError:
+                                print("❌ Entrez un nombre entier.")
+
+                        doc_existant.quantite += quantite
+                        print(
+                            f"✅ Quantité mise à jour : «{doc_existant.titre}» a maintenant {doc_existant.quantite} exemplaires.")
+                        print("-" * 60)
+                        return
+
+                    elif choix == "N":
+                        print("❌ Ajout annulé.")
+                        return
+
+                    else:
+                        print("❌ Réponse invalide! Veuillez inscrire O ou N.")
+
+            # Saisie ISBN
+            while True:
                 isbn = input("Saisissez l'ISBN du document : ").strip()
                 try:
-                    valeur = int(isbn)  # essaie de convertir en entier
+                    valeur = int(isbn)
                     if valeur <= 0:
                         raise ValueError
-                    break # Si l'isbn est valide, on sort de la boucle.
                 except ValueError:
                     print("❌ ISBN invalide! Veuillez saisir uniquement des chiffres positifs.")
                     continue
 
-            while True: # Boucle qui valide que la quantité est un entier
+                # Vérifier si ISBN existe déjà
+                if any(str(d.isbn) == isbn for d in self.liste_documents):
+                    print(f"❌ L'ISBN «{isbn}» existe déjà. Veuillez en saisir un autre.")
+                    continue
+                break
+
+            # Saisie quantité
+            while True:
                 try:
                     quantite = int(input("Saisissez la quantité : ").strip())
                     if quantite > 0:
@@ -140,36 +182,22 @@ class Bibliotheque:
                 except ValueError:
                     print("❌ Entrez un nombre entier.")
 
-            # Recherche si un document avec le même titre ou isbn existe déjà dans la liste de documents
-            try:
-                print("-" * 60)
-                doc_existant = next(d for d in self.liste_documents if
-                                    d.titre.strip().lower() == titre.lower() or str(d.isbn) == str(isbn))
-                # Document trouvé → augmenter quantité
-                choix = input(f"⚠️ Document «{doc_existant.titre}» existe déjà. Augmenter quantité ? (O/N) : ").strip().upper()
-                if choix == "O":
-                    doc_existant.quantite += quantite
-                    print(f"✅ Quantité mise à jour : «{doc_existant.titre}» a maintenant {doc_existant.quantite} exemplaires.")
-                    print("-" * 60)
-                else:
-                    print("❌ Ajout annulé.")
-            except StopIteration:
-                nouveau_document = Livre(titre, isbn, quantite, auteur)
-                self.liste_documents.append(nouveau_document)
-                print(f"✅ {quantite} exemplaires de «{titre}» ajoutés avec succès.")
-                print("-" * 60)
+            # Création du document
+            nouveau_document = Livre(titre, isbn, quantite, auteur)
+            self.liste_documents.append(nouveau_document)
+            print(f"✅ {quantite} exemplaires de «{titre}» ajoutés avec succès.")
+            print("-" * 60)
 
-            # On demande à l’utilisateur s’il veut ajouter un 2e document ou revenir au menu
+            # Ajouter un autre ?
             while True:
                 choix = input("Voulez-vous ajouter un autre document ? (O/N) : ").strip().upper()
                 if choix in ("O", "N"):
-                      break
+                    break
                 print("❌ Réponse invalide! Veuillez inscrire O ou N.")
             if choix == "N":
                 return
 
-
-# Supprimer un document
+    # Supprimer un document
     def enlever_doc(self):
         while True:
             # Saisie du ISBN par l'utilisateur
