@@ -95,7 +95,7 @@ if __name__ == "__main__":
                 retour_au_menu()
 
             case 10:
-                Emprunt.prolonger_date_retour(biblio.liste_emprunts[0])
+                Emprunt.menu_prolonger_emprunt(biblio)
 
             case 11 :
                 Sauvegarde.sauvegarder_livres(biblio)
