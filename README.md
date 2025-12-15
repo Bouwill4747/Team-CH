@@ -49,40 +49,102 @@ Les dates d’emprunt et de retour sont générées automatiquement, réduisant 
 
 ---
 ## Exemples d'utilisation
-### Menu
-![Menu.png](Images/Menu.png)
-### Ajouter adhérent
-![1AjouterAdherent.png](Images/1AjouterAdherent.png)
-### Supprimer adhérent
-![2SupprimerAdherent.png](Images/2SupprimerAdherent.png)
-### Afficher tous les adhérents
-![3AfficherAdherents.png](Images/3AfficherAdherents.png)
-### Ajouter document 
-![4AjouterDocument.png](Images/4AjouterDocument.png)
-### Supprimer document
-![5SupprimerDocument.png](Images/5SupprimerDocument.png)
-### Afficher tous les documents
-![6AfficherDocs.png](Images/6AfficherDocs.png)
-### Emprunter un livre
-![7EmprunterDoc.png](Images/7EmprunterDoc.png)
-### Retour d'un emprunt
-![8RetourDemprunt.png](Images/8RetourDemprunt.png)
-### Afficher tous les emprunts
-![9AfficherEmprunts.png](Images/9AfficherEmprunts.png)
-### Prolonger un emprunt
-![10ProlongerEmprunt.png](Images/10ProlongerEmprunt.png)
-### Sauvegarder les modifications
-![Sauvegarde.png](Images/Sauvegarde.png)
-### Quitter le programme 
-![Quitter.png](Images/Quitter.png)
-### Prise en charge des erreurs de saisies
-Les saisies erronées sont prises en compte par le programme pour l’ensemble des saisies utilisateur. Des messages d’erreur clairs sont affichés et des boucles permettent à l’utilisateur de corriger son entrée sans interrompre l’exécution du programme. 
-En voici un exemple :
+## Menu
+Affichage du menu principal au démarrage de l'application.
 
-![BouclesErreursSaisies.png](Images/BouclesErreursSaisies.png)
+![Menu.png](Images/Menu.png)
+
+
+## Ajouter adhérent
+Après l'ajout d'un nouvel adhérent valide, un message de confirmation s'affiche et l'adhérent reçoit un ID unique généré automatiquement. L'adhérent est également ajouté à la liste des adhérents.
+ 
+![1AjouterAdherent.png](Images/1AjouterAdherent.png)
+
+
+
+## Supprimer adhérent
+Lors de la suppression d'un adhérent existant, l'adhérent et ses emprunts associés sont supprimés, puis un message de confirmation s'affiche.
+
+![2SupprimerAdherent.png](Images/2SupprimerAdherent.png)
+
+
+## Afficher tous les adhérents
+Affichage de la liste complète de tous les adhérents avec leur nom, prénom et ID.
+
+![3AfficherAdherents.png](Images/3AfficherAdherents.png)
+
+
+## Ajouter document 
+Après l'ajout d'un document valide, un message de confirmation s'affiche et le document est ajouté à la liste des documents.
+
+![4AjouterDocument.png](Images/4AjouterDocument.png)
+
+
+## Supprimer document
+Lors de la suppression d'un document existant, l'adhérent et ses emprunts associés sont supprimés, puis un message de confirmation s'affiche.
+
+![5SupprimerDocument.png](Images/5SupprimerDocument.png)
+
+
+## Afficher tous les documents
+Affichage de la liste de tous les documents avec titre, auteur, ISBN, quantité disponible/totale.
+
+![6AfficherDocs.png](Images/6AfficherDocs.png)
+
+
+## Emprunter un livre
+Pour emprunter un livre, l'utilisateur doit saisir son ID d'adhérent.
+Ensuite, la liste des livres disponibles s'affichera. Si la saisie de l'ISBN est relié à un livre disponible, un message de confirmation apparaitra et la quantité disponible pour ce livre sera mise-à-jour automatiquement.
+
+![7EmprunterDoc.png](Images/7EmprunterDoc.png)
+
+
+## Retour d'un emprunt
+Pour retourner un emprunt, l'utilisateur doit saisir son ID d'adhérent.
+Ensuite, la liste de ses emprunts s'affichera. Si la saisie du numéro de l'emprunt est valide, un message de confirmation s'affichera, puis la quantité disponible pour ce livre et la liste d'emprunt de cet adhérent seront mis-à-jour automatiquement.
+
+![8RetourDemprunt.png](Images/8RetourDemprunt.png)
+
+
+## Afficher tous les emprunts
+Affichage de la liste de tous les emprunts en cours avec : nom de l'adhérent, titre du livre, ISBN, date d'emprunt et date de retour prévue.
+
+![9AfficherEmprunts.png](Images/9AfficherEmprunts.png)
+
+
+## Prolonger un emprunt
+Pour prolonger un emprunt, l'utilisateur doit saisir son ID d'adhérent.
+Ensuite, la liste de ses emprunts s'affichera. Si la saisie du numéro de l'emprunt est valide, un message de confirmation avec la nouvelle date de retour (ancienne date + 14 jours) s'affichera.
+
+![10ProlongerEmprunt.png](Images/10ProlongerEmprunt.png)
+
+
+## Sauvegarder les modifications
+Une fois cette option sélectionnée, les fichiers CSV sont mis à jour et un message de confirmation s'affiche.
+
+![Sauvegarde.png](Images/Sauvegarde.png)
+
+
+## Quitter le programme 
+Permet de quitter le programme.
+
+![Quitter.png](Images/Quitter.png)
+
+
+## Prise en charge des erreurs de saisies
+Les saisies erronées sont prises en compte par le programme pour l’ensemble des saisies utilisateur. Des messages d’erreur clairs sont affichés et des boucles permettent à l’utilisateur de corriger son entrée sans interrompre l’exécution du programme. 
+En voici quelques exemples :
+
+![ErreursSaisies1.png](Images/ErreursSaisies1.png)
+
+![ErreursSaisies4.png](Images/ErreursSaisies4.png)
+
+![ErreursSaisies2.png](Images/ErreursSaisies2.png)
+
+![ErreursSaisies3.png](Images/ErreursSaisies3.png)
 
 ---
 ## Auteurs
-Projet réalisé par Eric De Celles, Valérie Ouellet et William Bourbonnières dans un contexte académique dans le cadre du cours 420-2PR-BB Programmation orientée objet.
+Projet réalisé par Eric De Celles, Valérie Ouellet et William Bourbonnière dans dans le cadre du cours 420-2PR-BB Programmation orientée objet.
 Collège Bois-de-Boulogne
 14/12/2025
