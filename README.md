@@ -1,10 +1,11 @@
 # Projet Bibliothèque
 ## Description
 Module python développé en programmation orientée objet (POO) permettant la gestion complète d’une bibliothèque à l’aide d’un menu interactif en ligne de commande. L’utilisateur peut gérer les adhérents, les documents, les emprunts et la sauvegarde des données de manière dynamique.
+Les données de la bibliothèque sont manipulées à l’aide de fichiers CSV, permettant leur lecture et leur écriture pour assurer la persistance des informations.
 
-Concepts retrouvés : l’encapsulation, l’héritage, le polymorphisme et les classes abstraites.
+- Concepts utilisés : l’encapsulation, l’héritage, le polymorphisme et les classes abstraites.
 
-Modules utilisés : datetime, abc.
+- Modules utilisés : datetime, abc.
 
 ---
 ## Diagramme UML
@@ -17,40 +18,32 @@ Classe centrale :
 - elle maintient la liste des Emprunts.
 
 ### Adherent 
-Classe concrète qui peut être associée à 0 à n emprunts (0..n). Chaque emprunt est lié à un seul adhérent.
+- Classe concrète qui peut être associée à 0 à n emprunts (0..n). Chaque emprunt est lié à un seul adhérent.
 
 ### Emprunt
-Classe concrète reliant un Adherent à un Livre et contenant les informations temporelles (date_emprunt, date_retour).
+- Classe concrète reliant un Adherent à un Livre et contenant les informations temporelles (date_emprunt, date_retour).
 
 ### Document
-Classe abstraite (ABC) définissant les attributs communs (titre, isbn, quantite) ainsi que les méthodes abstraites liées au type de document et à la gestion des quantités.
+- Classe abstraite (ABC) définissant les attributs communs (titre, isbn, quantite) ainsi que les méthodes abstraites liées au type de document et à la gestion des quantités.
 
 ### Volume
-Classe abstraite intermédiaire héritant de Document, ajoutant l’attribut auteur.
+- Classe abstraite intermédiaire héritant de Document, ajoutant l’attribut auteur.
 
 ### Journal
-Hérite directement de Document et ajoute l’attribut date_publication.
+- Hérite directement de Document et ajoute l’attribut date_publication.
 
-#### Les classes concrètes suivantes héritent de Volume et illustrent le polymorphisme : Livre, BD, Dictionnaire.
+### Les classes concrètes suivantes héritent de Volume : 
+- Livre,
+- BD,
+- Dictionnaire.
 
 ---
-## Fonctionnement du module
-Le programme repose sur une classe centrale Bibliotheque qui agit comme point de contrôle du système. 
-Elle conserve :
-- la liste des documents,
-- la liste des adhérents,
-- la liste des emprunts.
-
-Les données de la bibliothèque sont manipulées à l’aide de fichiers CSV, permettant leur lecture et leur écriture pour assurer la persistance des informations.
-
-
-Un menu interactif permet à l’utilisateur de :
-- ajouter ou supprimer des adhérents,
-- ajouter ou supprimer des documents,
-- emprunter et retourner des livres,
-- prolonger un emprunt,
-- Sauvegarder les modifications,
-- afficher les listes d’adhérents et d’emprunts.
+## Fonctionnalités principales
+- Gestion des adhérents (ajout, suppression, affichage)
+- Gestion des documents (ajout, suppression, affichage)
+- Système d'emprunts et de retours
+- Prolongation des emprunts
+- Sauvegarde et chargement des données (CSV)
 
 Les dates d’emprunt et de retour sont générées automatiquement, réduisant ainsi les erreurs de saisie.
 
@@ -63,7 +56,7 @@ Les dates d’emprunt et de retour sont générées automatiquement, réduisant 
 ### Supprimer adhérent
 ![2SupprimerAdherent.png](Images/2SupprimerAdherent.png)
 ### Afficher tous les adhérents
-![3AfficherAdherents.png](../../OneDrive%20-%20Coll%C3%A8ge%20de%20Bois-de-Boulogne/Documents/ShareX/Screenshots/2025-12/3AfficherAdherents.png)
+![3AfficherAdherents.png](Images/3AfficherAdherents.png)
 ### Ajouter document 
 ![4AjouterDocument.png](Images/4AjouterDocument.png)
 ### Supprimer document
@@ -90,4 +83,6 @@ En voici un exemple :
 
 ---
 ## Auteurs
-Projet réalisé par Eric De Celles, Valérie Ouellet et William Bourbonnières dans un contexte académique dans le cadre du cours de programmation orientée objet.
+Projet réalisé par Eric De Celles, Valérie Ouellet et William Bourbonnières dans un contexte académique dans le cadre du cours 420-2PR-BB Programmation orientée objet.
+Collège Bois-de-Boulogne
+14/12/2025
