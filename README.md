@@ -63,7 +63,7 @@ Les dates d’emprunt et de retour sont générées automatiquement, réduisant 
 ### Supprimer adhérent
 ![2SupprimerAdherent.png](Images/2SupprimerAdherent.png)
 ### Afficher tous les adhérents
-![3AfficherAdherents.png](../../OneDrive%20-%20Coll%C3%A8ge%20de%20Bois-de-Boulogne/Documents/ShareX/Screenshots/2025-12/3AfficherAdherents.png)
+![3AfficherAdherents.png](Images/3AfficherAdherents.png)
 ### Ajouter document 
 ![4AjouterDocument.png](Images/4AjouterDocument.png)
 ### Supprimer document
@@ -90,4 +90,6 @@ En voici un exemple :
 
 ---
 ## Auteurs
-Projet réalisé par Eric De Celles, Valérie Ouellet et William Bourbonnières dans un contexte académique dans le cadre du cours de programmation orientée objet.
+Projet réalisé par Eric De Celles, Valérie Ouellet et William Bourbonnières dans un contexte académique dans le cadre du cours 420-2PR-BB Programmation orientée objet.
+Collège Bois-de-Boulogne
+14/12/2025
